@@ -7,7 +7,7 @@ import { VueLoaderPlugin } from 'vue-loader'
 import type { UserOptions } from '../../../src'
 import { webpackPlugin } from '../../../src'
 
-export default async (fixture: string, options: Partial<UserOptions> = {}, hot = false): Promise<webpack.Stats> => {
+export async function compile(fixture: string, options: Partial<UserOptions> = {}, hot = false): Promise<webpack.Stats> {
   const compiler = webpack({
     context: path.resolve(__dirname, '../..'),
     entry: `./${fixture}`,

@@ -1,14 +1,14 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import type { Stats } from 'webpack'
 
-import compiler from './compiler'
+import { compile } from './util'
 
 describe('webpack loader', () => {
-  test('generates custom block code', async () => {
+  it('generates custom block code', async () => {
     // Arrange
     // Act
-    const stats = await compiler('fixtures/test.vue')
+    const stats = await compile('fixtures/test.vue')
 
     // Assert
     const ftlModules = stats.toJson({ source: true }).modules
@@ -20,10 +20,10 @@ describe('webpack loader', () => {
     expect(ftlModules).toMatchSnapshot()
   })
 
-  test('includes HMR code only when HMR is enabled', async () => {
+  it('includes HMR code only when HMR is enabled', async () => {
     // Arrange
     // Act
-    const stats = await compiler('fixtures/test.vue', {}, true)
+    const stats = await compile('fixtures/test.vue', {}, true)
 
     // Assert
     const ftlModules = stats.toJson({ source: true }).modules
@@ -35,9 +35,9 @@ describe('webpack loader', () => {
     expect(ftlModules).toMatchSnapshot()
   })
 
-  test('errors with no locale attr', async () => {
+  it('errors with no locale attr', async () => {
     // Arrange
-    const func = async (): Promise<Stats> => await compiler('fixtures/noLocale.vue')
+    const func = async (): Promise<Stats> => await compile('fixtures/noLocale.vue')
 
     // Act
     // Assert
