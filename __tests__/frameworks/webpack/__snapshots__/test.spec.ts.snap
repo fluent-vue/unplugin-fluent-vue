@@ -1,0 +1,55 @@
+// Vitest Snapshot v1
+
+exports[`webpack loader > generates custom block code 1`] = `
+[
+  "
+import { FluentResource } from '@fluent/bundle'
+
+export default function (Component) {
+  const target = Component.options || Component
+  target.fluent = target.fluent || {}
+  target.fluent['en'] = new FluentResource(\`# Simple things are simple.
+hello-user = Hello, {$userName}!
+
+# Complex things are possible.
+shared-photos =
+  {$userName} {$photoCount ->
+     [one] added one photo
+    *[other] added {$photoCount} new photos
+  } to {$userGender ->
+     [male] his stream
+     [female] her stream
+    *[other] their stream
+  }.\`)
+  
+}
+",
+]
+`;
+
+exports[`webpack loader > includes HMR code only when HMR is enabled 1`] = `
+[
+  "
+import { FluentResource } from '@fluent/bundle'
+
+export default function (Component) {
+  const target = Component.options || Component
+  target.fluent = target.fluent || {}
+  target.fluent['en'] = new FluentResource(\`# Simple things are simple.
+hello-user = Hello, {$userName}!
+
+# Complex things are possible.
+shared-photos =
+  {$userName} {$photoCount ->
+     [one] added one photo
+    *[other] added {$photoCount} new photos
+  } to {$userGender ->
+     [male] his stream
+     [female] her stream
+    *[other] their stream
+  }.\`)
+  
+}
+",
+]
+`;
