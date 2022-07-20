@@ -8,9 +8,13 @@ import type { UserOptions } from '../../../src'
 import { webpackPlugin } from '../../../src'
 
 export async function compile(fixture: string, options: Partial<UserOptions> = {}, hot = false): Promise<webpack.Stats> {
-  const compiler = webpack({
+  const compilation = webpack({
     context: path.resolve(__dirname, '../..'),
     entry: `./${fixture}`,
+    externals: {
+      'vue': 'Vue',
+      '@fluent/bundle': 'FluentBundle',
+    },
     output: {
       path: path.resolve(__dirname),
       filename: 'bundle.js',
@@ -31,11 +35,11 @@ export async function compile(fixture: string, options: Partial<UserOptions> = {
     ],
   })
 
-  compiler.outputFileSystem = createFsFromVolume(new Volume())
-  compiler.outputFileSystem.join = path.join.bind(path)
+  compilation.outputFileSystem = createFsFromVolume(new Volume())
+  compilation.outputFileSystem.join = path.join.bind(path)
 
   return await new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
+    compilation.run((err, stats) => {
       if (err != null || stats == null)
         return reject(err)
       if (stats.hasErrors())
