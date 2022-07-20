@@ -1,0 +1,54 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  CI: true
+
+jobs:
+  test:
+    name: 'Test on Node.js ${{ matrix.node }} OS: ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [16, 17]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.x.x
+          run_install: true
+
+      - name: Test
+        run: pnpm test -- --coverage
+
+      - name: Upload code coverage
+        uses: codecov/codecov-action@v3
+        with:
+          flags: vue-${{matrix.vue}}
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint source code
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.2.0
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.x.x
+          run_install: true
+
+      - name: Lint
+        run: pnpm lint
