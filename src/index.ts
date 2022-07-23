@@ -1,7 +1,12 @@
+import { join, relative } from 'path'
+import { stat as fsStat } from 'fs/promises'
 import type { UnpluginContextMeta } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 
 import { parse } from '@vue/compiler-sfc'
+
+import MagicString from 'magic-string'
+import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
 
 import createDebug from 'debug'
 
@@ -10,14 +15,19 @@ import { getRaw, raiseError } from './utils'
 const debug = createDebug('unplugin-fluent-vue')
 
 export interface UserOptions {
-  blockType: string
+  blockType?: string
+  external?: {
+    baseDir: string
+    ftlDir: string
+    locales: string[]
+  }
 }
 
 export interface VueQuery {
   vue?: boolean
   src?: boolean
   global?: boolean
-  type?: 'script' | 'template' | 'style' | 'custom' | 'i18n'
+  type?: 'script' | 'template' | 'style' | 'custom' | 'fluent'
   blockType?: string
   index?: number
   locale?: string
@@ -32,6 +42,34 @@ function isCustomBlock(query: VueQuery, options: UserOptions): boolean {
       || query.type === options.blockType // for webpack (vue-loader)
       || query.blockType === options.blockType) // for webpack (vue-loader)
   )
+}
+
+interface InsertInfo {
+  insertPos: number
+  target: string
+}
+
+function getInsertInfo(source: string): InsertInfo {
+  let target = null
+
+  // vite-plugin-vue2
+  if (source.includes('__component__'))
+    target = '__component__'
+
+  // rollup-plugin-vue
+  if (source.includes('export default script'))
+    target = 'script'
+
+  // @vitejs/plugin-vue
+  if (source.includes('_sfc_main'))
+    target = '_sfc_main'
+
+  const insertPos = source.indexOf('export default')
+
+  if (insertPos === -1 || target === null)
+    throw new Error('Could not parse vue component')
+
+  return { insertPos, target }
 }
 
 export function parseVueRequest(id: string) {
@@ -60,6 +98,16 @@ export function parseVueRequest(id: string) {
   return {
     filename,
     query: ret,
+  }
+}
+
+async function fileExists(filename: string): Promise<boolean> {
+  try {
+    const stat = await fsStat(filename, { throwIfNoEntry: false } as any)
+    return !!stat
+  }
+  catch {
+    return false
   }
 }
 
@@ -101,24 +149,26 @@ async function getCode(
   }
 }
 
-export const unplugin = createUnplugin((options: Partial<UserOptions>, meta) => {
-  const resolvedOptions: UserOptions = {
-    ...options,
+function normalizePath(path: string) {
+  return path.replace(/\\/g, '/')
+}
+
+const isVue = createFilter(['**/*.vue'])
+
+export const unplugin = createUnplugin((options: UserOptions, meta) => {
+  const resolvedOptions: Required<UserOptions> = {
     blockType: 'fluent',
+    external: null,
+    ...options,
   }
 
   return {
     name: 'unplugin-fluent-vue',
     enforce: 'post',
-    /*
-    transformInclude (id: string) {
-      const query = parseVueQuery(id)
-
-      console.log('include', id, query, query.vue && query.blockType == options.blockType)
-
-      return query.vue && query.blockType == options.blockType
+    transformInclude(_id: string) {
+      // TODO
+      return true
     },
-    */
     async transform(source: string, id: string) {
       const { filename, query } = parseVueRequest(id)
 
@@ -160,24 +210,41 @@ export default function (Component) {
 }\n`
       }
 
+      if (isVue(id) && resolvedOptions.external != null) {
+        const external = resolvedOptions.external
+
+        const relativePath = relative(external.baseDir, id)
+
+        const magic = new MagicString(source, { filename: id })
+
+        const existingTranslations = []
+        for (const locale of external.locales) {
+          const ftlPath = normalizePath(join(external.ftlDir, locale, `${relativePath}.ftl`))
+          const ftlExists = await fileExists(ftlPath)
+
+          if (ftlExists) {
+            this.addWatchFile(ftlPath)
+
+            existingTranslations.push(locale)
+            magic.prepend(`import ${makeLegalIdentifier(locale)}_ftl from '${ftlPath}';\n`)
+          }
+        }
+
+        const { insertPos, target } = getInsertInfo(source)
+
+        magic.prepend('\n')
+        magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
+        for (const locale of existingTranslations)
+          magic.appendLeft(insertPos, `${target}.fluent['${locale}'] = ${makeLegalIdentifier(locale)}_ftl\n`)
+
+        return {
+          code: magic.toString(),
+          map: magic.generateMap({ hires: true }),
+        }
+      }
+
       return undefined
     },
-    /*
-    resolveId (id: string) {
-      const query = parseVueQuery(id)
-
-      const fluentBlock = query.vue && query.blockType == options.blockType
-
-      return fluentBlock ? id : null
-    },
-    load (id: string) {
-      console.log(id)
-
-      throw new Error('load')
-
-      return 'export default {}'
-    },
-     */
   }
 })
 
