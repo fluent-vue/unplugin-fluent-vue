@@ -165,9 +165,8 @@ export const unplugin = createUnplugin((options: UserOptions, meta) => {
   return {
     name: 'unplugin-fluent-vue',
     enforce: 'post',
-    transformInclude(_id: string) {
-      // TODO
-      return true
+    transformInclude(id: string) {
+      return isVue(id)
     },
     async transform(source: string, id: string) {
       const { filename, query } = parseVueRequest(id)
