@@ -67,7 +67,7 @@ function getInsertInfo(source: string): InsertInfo {
   const insertPos = source.indexOf('export default')
 
   if (insertPos === -1 || target === null)
-    throw new Error('Could not parse vue component')
+    throw new Error('Could not parse vue component. This is the issue with unplugin-fluent-vue.\nPlease report this issue to the unplugin-fluent-vue repository.')
 
   return { insertPos, target }
 }
