@@ -64,6 +64,10 @@ function getInsertInfo(source: string): InsertInfo {
   if (source.includes('_sfc_main'))
     target = '_sfc_main'
 
+  // vue-loader
+  if (source.includes('__exports__'))
+    target = '__exports__'
+
   const insertPos = source.indexOf('export default')
 
   if (insertPos === -1 || target === null)
