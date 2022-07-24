@@ -1,6 +1,6 @@
 import { join, relative } from 'path'
 import { stat as fsStat } from 'fs/promises'
-import type { UnpluginContextMeta } from 'unplugin'
+import type { UnpluginContextMeta, VitePlugin } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 
 import { parse } from '@vue/compiler-sfc'
@@ -248,7 +248,7 @@ export default function (Component) {
   }
 })
 
-export const vitePlugin = unplugin.vite
+export const vitePlugin: VitePlugin = unplugin.vite
 export const rollupPlugin = unplugin.rollup
 export const webpackPlugin = unplugin.webpack
 export const esbuildPlugin = unplugin.esbuild
