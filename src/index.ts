@@ -170,7 +170,7 @@ export const unplugin = createUnplugin((options: UserOptions, meta) => {
     name: 'unplugin-fluent-vue',
     enforce: 'post',
     transformInclude(id: string) {
-      return isVue(id)
+      return isVue(id) || isFtl(id)
     },
     async transform(source: string, id: string) {
       const { filename, query } = parseVueRequest(id)
@@ -244,6 +244,13 @@ export default function (Component) {
           code: magic.toString(),
           map: magic.generateMap({ hires: true }),
         }
+      }
+
+      if (isFtl(id)) {
+        return `
+import { FluentResource } from '@fluent/bundle'
+export default new FluentResource(${JSON.stringify(source)})
+`
       }
 
       return undefined
