@@ -25,14 +25,10 @@ export interface UserOptions {
 
 export interface VueQuery {
   vue?: boolean
-  src?: boolean
-  global?: boolean
   type?: 'script' | 'template' | 'style' | 'custom' | 'fluent'
   blockType?: string
   index?: number
   locale?: string
-  raw?: boolean
-  issuerPath?: string
 }
 
 function isCustomBlock(query: VueQuery, options: UserOptions): boolean {
@@ -82,8 +78,7 @@ export function parseVueRequest(id: string) {
   const ret: VueQuery = {}
 
   ret.vue = params.has('vue')
-  ret.global = params.has('global')
-  ret.src = params.has('src')
+
   if (params.has('type'))
     ret.type = params.get('type') as VueQuery['type']
 
@@ -95,9 +90,6 @@ export function parseVueRequest(id: string) {
 
   if (params.has('locale'))
     ret.locale = params.get('locale')
-
-  if (params.has('issuerPath'))
-    ret.issuerPath = params.get('issuerPath')
 
   return {
     filename,
@@ -122,30 +114,23 @@ async function getCode(
   query: VueQuery,
   framework: UnpluginContextMeta['framework'] = 'vite',
 ): Promise<string> {
-  const { index, issuerPath } = query
+  const { index } = query
   if (!Number.isInteger(index))
     raiseError(`unexpected index: ${index}`)
 
   if (framework === 'webpack') {
-    if (issuerPath) {
-      // via `src=xxx` of SFC
-      debug(`getCode (webpack) ${index} via issuerPath`, issuerPath)
-      return await getRaw(filename)
+    const result = parse(await getRaw(filename), {
+      sourceMap,
+      filename,
+    })
+    const block = result.descriptor.customBlocks[index!]
+    if (block) {
+      const code = block.src ? await getRaw(block.src) : block.content
+      debug(`getCode (webpack) ${index} from SFC`, code)
+      return code
     }
     else {
-      const result = parse(await getRaw(filename), {
-        sourceMap,
-        filename,
-      })
-      const block = result.descriptor.customBlocks[index!]
-      if (block) {
-        const code = block.src ? await getRaw(block.src) : block.content
-        debug(`getCode (webpack) ${index} from SFC`, code)
-        return code
-      }
-      else {
-        return source
-      }
+      return source
     }
   }
   else {
