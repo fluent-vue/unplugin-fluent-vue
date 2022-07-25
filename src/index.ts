@@ -143,6 +143,13 @@ function normalizePath(path: string) {
 }
 
 const isVue = createFilter(['**/*.vue'])
+const isFtl = createFilter(['**/*.ftl'])
+
+interface Dependency {
+  locale: string
+  ftlPath: string
+  importVariable: string
+}
 
 export const unplugin = createUnplugin((options: UserOptions, meta) => {
   const resolvedOptions: Required<UserOptions> = {
@@ -155,7 +162,9 @@ export const unplugin = createUnplugin((options: UserOptions, meta) => {
     name: 'unplugin-fluent-vue',
     enforce: 'post',
     transformInclude(id: string) {
-      return isVue(id) || isFtl(id)
+      const { query } = parseVueRequest(id)
+
+      return isVue(id) || isFtl(id) || isCustomBlock(query, resolvedOptions)
     },
     async transform(source: string, id: string) {
       const { filename, query } = parseVueRequest(id)
@@ -165,24 +174,6 @@ export const unplugin = createUnplugin((options: UserOptions, meta) => {
 
         // vue-loader pads SFC file sections with newlines - trim those
         const data = code.replace(/^(\n|\r\n)+|(\n|\r\n)+$/g, '')
-
-        const hotCode = meta.watchMode
-          ? `
-if (module.hot) {
-  delete target._fluent
-  if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
-    // Vue 3
-    const id = target.__hmrId
-    const api = __VUE_HMR_RUNTIME__
-    api.reload(id, target)
-  } else {
-    // Vue 2
-    // There is no proper api to access HMR for component from custom block
-    // so use this magic
-    delete target._Ctor
-  }
-}`
-          : ''
 
         if (query.locale == null)
           this.error('Custom block does not have locale attribute')
@@ -194,18 +185,35 @@ export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
   target.fluent['${query.locale}'] = new FluentResource(\`${data}\`)
-  ${hotCode}
-}\n`
+
+  if (module.hot) {
+    delete target._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      const id = target.__hmrId
+      const api = __VUE_HMR_RUNTIME__
+      api.reload(id, target)
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete target._Ctor
+    }
+  }
+}
+`
       }
 
       if (isVue(id) && resolvedOptions.external != null) {
+        const magic = new MagicString(source, { filename: id })
+
+        const { insertPos, target } = getInsertInfo(source)
+
         const external = resolvedOptions.external
 
         const relativePath = relative(external.baseDir, id)
 
-        const magic = new MagicString(source, { filename: id })
-
-        const existingTranslations = []
+        const dependencies: Dependency[] = []
         for (const locale of external.locales) {
           const ftlPath = normalizePath(join(external.ftlDir, locale, `${relativePath}.ftl`))
           const ftlExists = await fileExists(ftlPath)
@@ -213,17 +221,38 @@ export default function (Component) {
           if (ftlExists) {
             this.addWatchFile(ftlPath)
 
-            existingTranslations.push(locale)
-            magic.prepend(`import ${makeLegalIdentifier(locale)}_ftl from '${ftlPath}';\n`)
+            const importVariable = `${makeLegalIdentifier(locale)}_ftl`
+
+            dependencies.push({
+              locale,
+              ftlPath,
+              importVariable,
+            })
+            magic.prepend(`import ${importVariable} from '${ftlPath}';\n`)
           }
         }
 
-        const { insertPos, target } = getInsertInfo(source)
-
-        magic.prepend('\n')
         magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
-        for (const locale of existingTranslations)
-          magic.appendLeft(insertPos, `${target}.fluent['${locale}'] = ${makeLegalIdentifier(locale)}_ftl\n`)
+        for (const dep of dependencies)
+          magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
+        magic.appendLeft(insertPos, `
+if (module.hot) {
+  module.hot.accept([${dependencies.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
+    ${dependencies.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
+
+    delete ${target}._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete ${target}._Ctor
+    }
+  })
+}
+`)
 
         return {
           code: magic.toString(),
