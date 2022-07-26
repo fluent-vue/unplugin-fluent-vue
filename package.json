@@ -1,6 +1,6 @@
 {
   "name": "unplugin-fluent-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "unplugin for fluent-vue. Adds support for custom blocks in Vue SFC and external ftl files.",
   "author": {
     "name": "Ivan Demchuk",
