@@ -7,6 +7,10 @@
     "url": "https://demivan.me"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluent-vue/unplugin-fluent-vue.git"
+  },
   "keywords": [
     "unplugin",
     "vue",
