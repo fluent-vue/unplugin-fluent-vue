@@ -4,6 +4,7 @@ export default defineConfig({
   entry: [
     './src/index.ts',
     './src/webpack.ts',
+    './src/vite.ts',
   ],
   format: ['esm', 'cjs'],
   outDir: 'dist/',

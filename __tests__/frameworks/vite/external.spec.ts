@@ -5,7 +5,7 @@ import vue3base from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 
-import { FTLFluentPlugin } from '../../../src/vite'
+import { ExternalFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
 
 const vue3 = () => vue3base({
@@ -21,7 +21,7 @@ describe('Vite external', () => {
     const code = await compile({
       plugins: [
         vue3(),
-        FTLFluentPlugin({
+        ExternalFluentPlugin({
           baseDir: resolve(baseDir, 'fixtures'),
           ftlDir: resolve(baseDir, 'fixtures/ftl'),
           locales: ['en', 'da'],
@@ -39,7 +39,7 @@ describe('Vite external', () => {
     const code = await compile({
       plugins: [
         vue3(),
-        FTLFluentPlugin({
+        ExternalFluentPlugin({
           baseDir: resolve(baseDir, 'fixtures'),
           ftlDir: resolve(baseDir, 'fixtures/ftl'),
           locales: ['en', 'da'],
@@ -57,7 +57,7 @@ describe('Vite external', () => {
     const code = await compile({
       plugins: [
         vue2(),
-        FTLFluentPlugin({
+        ExternalFluentPlugin({
           baseDir: resolve(baseDir, 'fixtures'),
           ftlDir: resolve(baseDir, 'fixtures/ftl'),
           locales: ['en', 'da'],
