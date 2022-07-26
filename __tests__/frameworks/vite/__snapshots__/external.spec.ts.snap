@@ -46,8 +46,9 @@ __component__.fluent = __component__.fluent || {};
 __component__.fluent['en'] = en_ftl
 __component__.fluent['da'] = da_ftl
 
-if (module.hot) {
-  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
+const __HOT_API__ = import.meta.hot || import.meta.webpackHot
+if (__HOT_API__) {
+  __HOT_API__.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
     __component__.fluent['en'] = en_ftl
 __component__.fluent['da'] = da_ftl
 
@@ -96,8 +97,9 @@ _sfc_main.fluent = _sfc_main.fluent || {};
 _sfc_main.fluent['en'] = en_ftl
 _sfc_main.fluent['da'] = da_ftl
 
-if (module.hot) {
-  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
+const __HOT_API__ = import.meta.hot || import.meta.webpackHot
+if (__HOT_API__) {
+  __HOT_API__.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
     _sfc_main.fluent['en'] = en_ftl
 _sfc_main.fluent['da'] = da_ftl
 
@@ -156,8 +158,9 @@ import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
 _sfc_main.fluent = _sfc_main.fluent || {};
 _sfc_main.fluent['en'] = en_ftl
 
-if (module.hot) {
-  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.setup.vue.ftl'], () => {
+const __HOT_API__ = import.meta.hot || import.meta.webpackHot
+if (__HOT_API__) {
+  __HOT_API__.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.setup.vue.ftl'], () => {
     _sfc_main.fluent['en'] = en_ftl
 
     delete _sfc_main._fluent
