@@ -21,8 +21,11 @@ export const unplugin = createUnplugin((options: SFCPluginOptions) => {
       const { query } = parseVueRequest(id)
 
       if (isCustomBlock(query, resolvedOptions)) {
-        // vue-loader pads SFC file sections with newlines - trim those
-        const data = source.replace(/^(\n|\r\n)+|(\n|\r\n)+$/g, '')
+        const data = source
+          // vue-loader pads SFC file sections with newlines - trim those
+          .replace(/^(\n|\r\n)+|(\n|\r\n)+$/g, '')
+          // normalise newlines
+          .replace(/\r\n/g, '\n')
 
         if (query.locale == null)
           this.error('Custom block does not have locale attribute')
