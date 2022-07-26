@@ -1,7 +1,8 @@
 // Vitest Snapshot v1
 
-exports[`webpack loader > generates custom block code 1`] = `
+exports[`Webpack SFC > generates custom block code 1`] = `
 [
+  "export { default } from \\"-!../../node_modules/.pnpm/unplugin@0.8.0_vite@3.0.3+webpack@5.73.0/node_modules/unplugin/dist/webpack/loaders/transform.js??unplugin-fluent-vue-sfc!../../node_modules/.pnpm/vue-loader@17.0.0_webpack@5.73.0/node_modules/vue-loader/dist/index.js??ruleSet[1].rules[2].use[0]!./test.vue?vue&type=custom&index=0&blockType=fluent&locale=en\\"; export * from \\"-!../../node_modules/.pnpm/unplugin@0.8.0_vite@3.0.3+webpack@5.73.0/node_modules/unplugin/dist/webpack/loaders/transform.js??unplugin-fluent-vue-sfc!../../node_modules/.pnpm/vue-loader@17.0.0_webpack@5.73.0/node_modules/vue-loader/dist/index.js??ruleSet[1].rules[2].use[0]!./test.vue?vue&type=custom&index=0&blockType=fluent&locale=en\\"",
   "
 import { FluentResource } from '@fluent/bundle'
 
@@ -21,14 +22,14 @@ shared-photos =
      [female] her stream
     *[other] their stream
   }.\`)
-  
 }
 ",
 ]
 `;
 
-exports[`webpack loader > includes HMR code only when HMR is enabled 1`] = `
+exports[`Webpack SFC > includes HMR code only when HMR is enabled 1`] = `
 [
+  "export { default } from \\"-!../../node_modules/.pnpm/unplugin@0.8.0_vite@3.0.3+webpack@5.73.0/node_modules/unplugin/dist/webpack/loaders/transform.js??unplugin-fluent-vue-sfc!../../node_modules/.pnpm/vue-loader@17.0.0_webpack@5.73.0/node_modules/vue-loader/dist/index.js??ruleSet[1].rules[2].use[0]!./test.vue?vue&type=custom&index=0&blockType=fluent&locale=en\\"; export * from \\"-!../../node_modules/.pnpm/unplugin@0.8.0_vite@3.0.3+webpack@5.73.0/node_modules/unplugin/dist/webpack/loaders/transform.js??unplugin-fluent-vue-sfc!../../node_modules/.pnpm/vue-loader@17.0.0_webpack@5.73.0/node_modules/vue-loader/dist/index.js??ruleSet[1].rules[2].use[0]!./test.vue?vue&type=custom&index=0&blockType=fluent&locale=en\\"",
   "
 import { FluentResource } from '@fluent/bundle'
 
@@ -48,7 +49,6 @@ shared-photos =
      [female] her stream
     *[other] their stream
   }.\`)
-  
 }
 ",
 ]

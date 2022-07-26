@@ -1,8 +1,7 @@
 // Vitest Snapshot v1
 
-exports[`external ftl file support mode:development > works with vue 2 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import.meta.env = {\\"BASE_URL\\":\\"/\\",\\"MODE\\":\\"development\\",\\"DEV\\":true,\\"PROD\\":false,\\"SSR\\":false};
-import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
+exports[`Vite external > works with vue 2 1`] = `
+"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import.meta.env = {\\"BASE_URL\\":\\"/\\",\\"MODE\\":\\"development\\",\\"DEV\\":true,\\"PROD\\":false,\\"SSR\\":false};import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
 import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
 const __vue2_script = {}
 import { render as __vue2_render, staticRenderFns as __vue2_staticRenderFns } from \\"/fixtures/components/external.vue?vue&type=template&lang.js\\"
@@ -46,137 +45,29 @@ if(!import.meta.env.SSR && __VUE_HMR_RUNTIME__.compatible){
 __component__.fluent = __component__.fluent || {};
 __component__.fluent['en'] = en_ftl
 __component__.fluent['da'] = da_ftl
-export default /*#__PURE__*/(function () { return __component__.exports })()"
-`;
 
-exports[`external ftl file support mode:development > works with vue 3 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");
-import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
-import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
-const _sfc_main = {}
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
-
-function _sfc_render(_ctx, _cache) {
-  return (_openBlock(), _createElementBlock(\\"div\\", null, [
-    _createElementVNode(\\"div\\", null, _toDisplayString(_ctx.$t('hello-user', { userName: _ctx.userName })), 1 /* TEXT */),
-    _createElementVNode(\\"div\\", null, _toDisplayString(_ctx.$t('shared-photos', { userName: _ctx.userName, photoCount: _ctx.photoCount, userGender: _ctx.userGender })), 1 /* TEXT */)
-  ]))
-}
-
-
-_sfc_main.__hmrId = \\"7d038643\\"
-typeof __VUE_HMR_RUNTIME__ !== 'undefined' && __VUE_HMR_RUNTIME__.createRecord(_sfc_main.__hmrId, _sfc_main)
-import.meta.hot.accept(mod => {
-  if (!mod) return
-  const { default: updated, _rerender_only } = mod
-  if (_rerender_only) {
-    __VUE_HMR_RUNTIME__.rerender(updated.__hmrId, updated.render)
-  } else {
-    __VUE_HMR_RUNTIME__.reload(updated.__hmrId, updated)
-  }
-})
-import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
-_sfc_main.fluent = _sfc_main.fluent || {};
-_sfc_main.fluent['en'] = en_ftl
-_sfc_main.fluent['da'] = da_ftl
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/components/external.vue\\"]])"
-`;
-
-exports[`external ftl file support mode:development > works with vue 3 script setup 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.setup.vue\\");
-import en_ftl from '/fixtures/ftl/en/components/external.setup.vue.ftl?import';
-const _sfc_main = {
-  __name: 'external.setup',
-  setup(__props, { expose }) {
-  expose();
-
-  const test = 'test'
-
-const __returned__ = { test }
-Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
-return __returned__
-}
-
-}
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
-
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (_openBlock(), _createElementBlock(\\"div\\", null, [
-    _createElementVNode(\\"div\\", null, _toDisplayString(_ctx.$t('hello-user', { userName: _ctx.userName })), 1 /* TEXT */),
-    _createElementVNode(\\"div\\", null, _toDisplayString(_ctx.$t('shared-photos', { userName: _ctx.userName, photoCount: _ctx.photoCount, userGender: _ctx.userGender })), 1 /* TEXT */)
-  ]))
-}
-
-
-_sfc_main.__hmrId = \\"38704845\\"
-typeof __VUE_HMR_RUNTIME__ !== 'undefined' && __VUE_HMR_RUNTIME__.createRecord(_sfc_main.__hmrId, _sfc_main)
-import.meta.hot.accept(mod => {
-  if (!mod) return
-  const { default: updated, _rerender_only } = mod
-  if (_rerender_only) {
-    __VUE_HMR_RUNTIME__.rerender(updated.__hmrId, updated.render)
-  } else {
-    __VUE_HMR_RUNTIME__.reload(updated.__hmrId, updated)
-  }
-})
-import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
-_sfc_main.fluent = _sfc_main.fluent || {};
-_sfc_main.fluent['en'] = en_ftl
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/components/external.setup.vue\\"]])"
-`;
-
-exports[`external ftl file support mode:production > works with vue 2 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import.meta.env = {\\"BASE_URL\\":\\"/\\",\\"MODE\\":\\"production\\",\\"DEV\\":true,\\"PROD\\":false,\\"SSR\\":false};
-import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
-import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
-const __vue2_script = {}
-import { render as __vue2_render, staticRenderFns as __vue2_staticRenderFns } from \\"/fixtures/components/external.vue?vue&type=template&lang.js\\"
-const __cssModules = {}
-
-/* normalize component */
-import __vue2_normalizer from \\"/@id/__x00__/vite/vueComponentNormalizer\\"
-var __component__ = /*#__PURE__*/__vue2_normalizer(
-  __vue2_script,
-  __vue2_render,
-  __vue2_staticRenderFns,
-  false,
-  __vue2_injectStyles,
-  null,
-  null,
-  null
-)
-
-function __vue2_injectStyles (context) {
-  for(let o in __cssModules){
-    this[o] = __cssModules[o]
-  }
-}
-
-__component__.options.__file = \\"fixtures/components/external.vue\\"
-/* hot reload */
-import __VUE_HMR_RUNTIME__ from \\"/@id/__x00__/vite/vueHotReload\\"
-import __VUE_IDENTIFIER__ from \\"/@id/vue\\"
-__VUE_HMR_RUNTIME__.install(__VUE_IDENTIFIER__)
-if(!import.meta.env.SSR && __VUE_HMR_RUNTIME__.compatible){
-  if (!__VUE_HMR_RUNTIME__.isRecorded(\\"4c0553ad\\")) {
-    __VUE_HMR_RUNTIME__.createRecord(\\"4c0553ad\\", __component__.options)
-  }
-   import.meta.hot.accept((update) => {
-      __VUE_HMR_RUNTIME__.reload(\\"4c0553ad\\", update.default)
-   })
-   import.meta.hot.accept(\\"/fixtures/components/external.vue?vue&type=template&lang.js\\", (update) => {
-      __VUE_HMR_RUNTIME__.rerender(\\"4c0553ad\\", update)
-   })
-}
-__component__.fluent = __component__.fluent || {};
-__component__.fluent['en'] = en_ftl
+if (module.hot) {
+  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
+    __component__.fluent['en'] = en_ftl
 __component__.fluent['da'] = da_ftl
+
+    delete __component__._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(__component__.__hmrId, __component__)
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete __component__._Ctor
+    }
+  })
+}
 export default /*#__PURE__*/(function () { return __component__.exports })()"
 `;
 
-exports[`external ftl file support mode:production > works with vue 3 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");
-import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
+exports[`Vite external > works with vue 3 1`] = `
+"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
 import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
 const _sfc_main = {}
 import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
@@ -204,12 +95,29 @@ import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
 _sfc_main.fluent = _sfc_main.fluent || {};
 _sfc_main.fluent['en'] = en_ftl
 _sfc_main.fluent['da'] = da_ftl
+
+if (module.hot) {
+  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.vue.ftl', '/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/da/components/external.vue.ftl'], () => {
+    _sfc_main.fluent['en'] = en_ftl
+_sfc_main.fluent['da'] = da_ftl
+
+    delete _sfc_main._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(_sfc_main.__hmrId, _sfc_main)
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete _sfc_main._Ctor
+    }
+  })
+}
 export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/components/external.vue\\"]])"
 `;
 
-exports[`external ftl file support mode:production > works with vue 3 script setup 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.setup.vue\\");
-import en_ftl from '/fixtures/ftl/en/components/external.setup.vue.ftl?import';
+exports[`Vite external > works with vue 3 script setup 1`] = `
+"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.setup.vue\\");import en_ftl from '/fixtures/ftl/en/components/external.setup.vue.ftl?import';
 const _sfc_main = {
   __name: 'external.setup',
   setup(__props, { expose }) {
@@ -247,5 +155,22 @@ import.meta.hot.accept(mod => {
 import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
 _sfc_main.fluent = _sfc_main.fluent || {};
 _sfc_main.fluent['en'] = en_ftl
+
+if (module.hot) {
+  module.hot.accept(['/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/ftl/en/components/external.setup.vue.ftl'], () => {
+    _sfc_main.fluent['en'] = en_ftl
+
+    delete _sfc_main._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(_sfc_main.__hmrId, _sfc_main)
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete _sfc_main._Ctor
+    }
+  })
+}
 export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/components/external.setup.vue\\"]])"
 `;

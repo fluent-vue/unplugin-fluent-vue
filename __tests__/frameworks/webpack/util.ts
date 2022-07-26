@@ -4,10 +4,10 @@ import { Volume, createFsFromVolume } from 'memfs'
 
 import { VueLoaderPlugin } from 'vue-loader'
 
-import type { UserOptions } from '../../../src'
-import { webpackPlugin } from '../../../src'
+import type { SFCPluginOptions } from '../../../src/webpack'
+import { SFCFluentPlugin } from '../../../src/webpack'
 
-export async function compile(fixture: string, options: Partial<UserOptions> = {}, hot = false): Promise<webpack.Stats> {
+export async function compile(fixture: string, options: Partial<SFCPluginOptions> = {}, hot = false): Promise<webpack.Stats> {
   const compilation = webpack({
     context: path.resolve(__dirname, '../..'),
     entry: `./${fixture}`,
@@ -30,7 +30,7 @@ export async function compile(fixture: string, options: Partial<UserOptions> = {
     },
     plugins: [
       new VueLoaderPlugin(),
-      webpackPlugin(options),
+      SFCFluentPlugin(options),
       ...(hot ? [new webpack.HotModuleReplacementPlugin()] : []),
     ],
   })

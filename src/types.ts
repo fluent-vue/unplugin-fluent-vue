@@ -5,7 +5,7 @@ export interface ExternalPluginOptions {
 }
 
 export interface SFCPluginOptions {
-  blockType: string
+  blockType?: string
 }
 
 export interface InsertInfo {

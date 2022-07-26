@@ -4,21 +4,21 @@ import vue3base from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 
-import { vitePlugin } from '../../../src'
+import { SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
 
 const vue3 = () => vue3base({
   compiler,
 })
 
-describe('vite plugin', () => {
+describe('Vite SFC', () => {
   it('generates custom block code', async () => {
     // Arrange
     // Act
     const code = await compile({
       plugins: [
         vue3(),
-        vitePlugin(),
+        SFCFluentPlugin(),
       ],
     }, '/fixtures/test.vue')
 
@@ -32,7 +32,7 @@ describe('vite plugin', () => {
     const code = await compile({
       plugins: [
         vue2(),
-        vitePlugin(),
+        SFCFluentPlugin(),
       ],
     }, '/fixtures/test.vue')
 
@@ -46,7 +46,7 @@ describe('vite plugin', () => {
     const code = await compile({
       plugins: [
         vue3(),
-        vitePlugin({
+        SFCFluentPlugin({
           blockType: 'custom',
         }),
       ],

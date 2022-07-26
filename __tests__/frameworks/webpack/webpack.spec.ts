@@ -4,7 +4,7 @@ import type { Stats } from 'webpack'
 
 import { compile } from './util'
 
-describe('webpack loader', () => {
+describe('Webpack SFC', () => {
   it('generates custom block code', async () => {
     // Arrange
     // Act
@@ -16,7 +16,6 @@ describe('webpack loader', () => {
       .map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
-    expect(ftlModules).toHaveLength(1)
     expect(ftlModules).toMatchSnapshot()
   })
 
@@ -31,7 +30,6 @@ describe('webpack loader', () => {
       .map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
-    expect(ftlModules).toHaveLength(1)
     expect(ftlModules).toMatchSnapshot()
   })
 
