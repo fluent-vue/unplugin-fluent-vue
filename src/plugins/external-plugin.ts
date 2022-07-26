@@ -95,8 +95,9 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
         for (const dep of dependencies)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
         magic.appendLeft(insertPos, `
-if (module.hot) {
-  module.hot.accept([${dependencies.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
+const __HOT_API__ = import.meta.hot || import.meta.webpackHot
+if (__HOT_API__) {
+  __HOT_API__.accept([${dependencies.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
     ${dependencies.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
 
     delete ${target}._fluent
