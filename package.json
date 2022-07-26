@@ -51,7 +51,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "vitest",
+    "test": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test",
     "build": "tsup",
     "lint": "eslint .",
     "prepare": "husky install"
@@ -63,24 +63,14 @@
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "0.25.2",
-    "@vitejs/plugin-vue": "3.0.1",
-    "@vue/compiler-sfc": "3.2.37",
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
     "c8": "7.12.0",
     "eslint": "8.20.0",
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
-    "memfs": "3.4.7",
     "release-it": "14.14.3",
-    "release-it-lerna-changelog": "4.0.1",
     "tsup": "6.2.0",
-    "typescript": "4.7.4",
-    "vite": "3.0.3",
-    "vite-plugin-vue2": "2.0.2",
-    "vitest": "0.19.1",
-    "vue-loader": "17.0.0",
-    "vue-template-compiler": "2.7.8",
-    "vue/compiler-sfc": "npm:@vue/compiler-sfc@^3.2.37",
-    "webpack": "5.74.0"
+    "typescript": "4.7.4"
   },
   "lint-staged": {
     "*.js": "eslint --fix",

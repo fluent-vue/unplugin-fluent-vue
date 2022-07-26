@@ -4,7 +4,7 @@ import vue3base from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 
-import { SFCFluentPlugin } from '../../../src/vite'
+import { SFCFluentPlugin } from '../../../../src/vite'
 import { compile } from './util'
 
 const vue3 = () => vue3base({

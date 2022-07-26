@@ -5,14 +5,14 @@ import vue3base from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 
-import { ExternalFluentPlugin } from '../../../src/vite'
+import { ExternalFluentPlugin } from '../../../../src/vite'
 import { compile } from './util'
 
 const vue3 = () => vue3base({
   compiler,
 })
 
-const baseDir = resolve(__dirname, '../..')
+const baseDir = resolve(__dirname, '../../..')
 
 describe('Vite external', () => {
   it('works with vue 3', async () => {

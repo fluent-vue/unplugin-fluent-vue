@@ -3,7 +3,7 @@ import { resolve, sep } from 'path'
 import type { InlineConfig } from 'vite'
 import { createServer } from 'vite'
 
-const baseDir = resolve(__dirname, '../..')
+const baseDir = resolve(__dirname, '../../..')
 
 export async function compile(options: InlineConfig, file: string): Promise<string | undefined> {
   const vite = await createServer({

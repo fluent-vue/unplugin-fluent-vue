@@ -1,0 +1,16 @@
+{
+  "name": "test-webpack",
+  "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "3.2.37",
+    "memfs": "3.4.7",
+    "vite": "3.0.3",
+    "vitest": "0.19.1",
+    "vue": "3.2.37",
+    "vue-loader": "17.0.0",
+    "webpack": "5.74.0"
+  }
+}
