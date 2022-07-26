@@ -26,5 +26,8 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
   })
 
   const output = await vite.transformRequest(file)
-  return output?.code
+  const code = output?.code
+
+  // normalize paths
+  return code?.replaceAll(baseDir, '')
 }

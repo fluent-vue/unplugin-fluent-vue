@@ -26,7 +26,7 @@ import.meta.hot.accept(mod => {
   }
 })
 import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/home/demivan/projects/fluent/unplugin-fluent-vue/__tests__/fixtures/test.vue\\"]])"
+export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/test.vue\\"]])"
 `;
 
 exports[`Vite SFC > supports custom blockType 1`] = `undefined`;
