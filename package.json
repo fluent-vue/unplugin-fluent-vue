@@ -14,16 +14,39 @@
     "vite",
     "i18n"
   ],
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
   "exports": {
-    "production": {
-      "require": "./dist/prod/index.js",
-      "default": "./dist/prod/index.mjs"
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
-    "require": "./dist/index.js",
-    "default": "./dist/index.mjs"
+    "./*": "./*",
+    "./esbuild": {
+      "require": "./dist/esbuild.js",
+      "import": "./dist/esbuild.mjs",
+      "types": "./dist/esbuild.d.ts"
+    },
+    "./rollup": {
+      "require": "./dist/rollup.js",
+      "import": "./dist/rollup.mjs",
+      "types": "./dist/rollup.d.ts"
+    },
+    "./vite": {
+      "require": "./dist/vite.js",
+      "import": "./dist/vite.mjs",
+      "types": "./dist/vite.d.ts"
+    },
+    "./webpack": {
+      "require": "./dist/webpack.js",
+      "import": "./dist/webpack.mjs",
+      "types": "./dist/webpack.d.ts"
+    }
   },
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "vitest",
@@ -33,10 +56,8 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.2.1",
-    "@vue/compiler-sfc": "^3.2.37",
-    "debug": "^4.3.4",
     "magic-string": "^0.26.2",
-    "unplugin": "^0.7.2"
+    "unplugin": "^0.8.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.25.2",
@@ -50,7 +71,6 @@
     "release-it-lerna-changelog": "^4.0.1",
     "tsup": "^6.1.2",
     "typescript": "^4.7.4",
-    "vite": "^3.0.2",
     "vite-plugin-vue2": "^2.0.2",
     "vitest": "^0.16.0",
     "vue-loader": "^17.0.0",
