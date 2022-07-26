@@ -50,4 +50,3 @@ export default function (Component) {
 export const vitePlugin: (options?: SFCPluginOptions) => VitePlugin = unplugin.vite
 export const rollupPlugin = unplugin.rollup
 export const webpackPlugin = unplugin.webpack
-export const esbuildPlugin = unplugin.esbuild

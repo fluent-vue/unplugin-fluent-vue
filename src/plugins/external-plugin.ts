@@ -135,4 +135,3 @@ export default new FluentResource(${JSON.stringify(source)})
 export const vitePlugin: (options?: ExternalPluginOptions) => VitePlugin = unplugin.vite
 export const rollupPlugin = unplugin.rollup
 export const webpackPlugin = unplugin.webpack
-export const esbuildPlugin = unplugin.esbuild

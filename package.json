@@ -1,6 +1,6 @@
 {
   "name": "unplugin-fluent-vue",
-  "description": "unplugin for fluent-vue that adds support for custom blocks in Vue SFC",
+  "description": "unplugin for fluent-vue. Adds support for custom blocks in Vue SFC and external ftl files.",
   "author": {
     "name": "Ivan Demchuk",
     "email": "ivan.demchuk@gmail.com",
@@ -8,15 +8,18 @@
   },
   "license": "MIT",
   "keywords": [
+    "unplugin",
     "vue",
     "fluent-vue",
+    "ftl",
+    "fluent",
     "webpack",
     "vite",
-    "i18n"
+    "i18n",
+    "plural"
   ],
   "files": [
-    "dist",
-    "*.d.ts"
+    "dist"
   ],
   "exports": {
     ".": {
@@ -25,11 +28,6 @@
       "types": "./dist/index.d.ts"
     },
     "./*": "./*",
-    "./esbuild": {
-      "require": "./dist/esbuild.js",
-      "import": "./dist/esbuild.mjs",
-      "types": "./dist/esbuild.d.ts"
-    },
     "./rollup": {
       "require": "./dist/rollup.js",
       "import": "./dist/rollup.mjs",
