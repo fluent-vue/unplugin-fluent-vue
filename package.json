@@ -52,6 +52,7 @@
   ],
   "scripts": {
     "test": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test",
+    "test:coverage": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test -- --coverage",
     "build": "tsup",
     "lint": "eslint .",
     "prepare": "husky install"

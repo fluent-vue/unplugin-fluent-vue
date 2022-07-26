@@ -30,7 +30,7 @@ jobs:
           run_install: true
 
       - name: Test
-        run: pnpm test -- --coverage
+        run: pnpm test:coverage
 
       - name: Upload code coverage
         uses: codecov/codecov-action@v3
