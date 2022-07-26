@@ -48,7 +48,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "*.d.ts"
   ],
   "scripts": {
     "test": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test",
