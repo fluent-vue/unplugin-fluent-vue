@@ -3,7 +3,8 @@
     "target": "ESNext",
     "moduleResolution": "node",
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["node"]
   },
   "exclude": [
     "node_modules"
