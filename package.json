@@ -18,34 +18,34 @@
     "i18n",
     "plural"
   ],
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.mjs"
     },
     "./*": "./*",
     "./rollup": {
+      "types": "./dist/rollup.d.ts",
       "require": "./dist/rollup.js",
-      "import": "./dist/rollup.mjs",
-      "types": "./dist/rollup.d.ts"
+      "import": "./dist/rollup.mjs"
     },
     "./vite": {
+      "types": "./dist/vite.d.ts",
       "require": "./dist/vite.js",
-      "import": "./dist/vite.mjs",
-      "types": "./dist/vite.d.ts"
+      "import": "./dist/vite.mjs"
     },
     "./webpack": {
+      "types": "./dist/webpack.d.ts",
       "require": "./dist/webpack.js",
-      "import": "./dist/webpack.mjs",
-      "types": "./dist/webpack.d.ts"
+      "import": "./dist/webpack.mjs"
     }
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "vitest",
     "build": "tsup",
