@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve, sep } from 'path'
 
 import type { InlineConfig } from 'vite'
 import { createServer } from 'vite'
@@ -29,5 +29,5 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
   const code = output?.code
 
   // normalize paths
-  return code?.replaceAll(baseDir, '')
+  return code?.replaceAll(baseDir.replaceAll(sep, '/'), '')
 }
