@@ -12,10 +12,11 @@ describe('Webpack SFC', () => {
 
     // Assert
     const ftlModules = stats.toJson({ source: true }).modules
-      ?.filter(module => module.name?.includes('blockType=fluent') === true)
+      ?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc'))
       .map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
+    expect(ftlModules).toHaveLength(1)
     expect(ftlModules).toMatchSnapshot()
   })
 
@@ -26,10 +27,11 @@ describe('Webpack SFC', () => {
 
     // Assert
     const ftlModules = stats.toJson({ source: true }).modules
-      ?.filter(module => module.name?.includes('blockType=fluent') === true)
+      ?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc'))
       .map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
+    expect(ftlModules).toHaveLength(1)
     expect(ftlModules).toMatchSnapshot()
   })
 
