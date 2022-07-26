@@ -37,7 +37,7 @@ import { FluentResource } from '@fluent/bundle'
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(\`${data}\`)
+  target.fluent['${query.locale}'] = new FluentResource(${JSON.stringify(data)})
 }
 `
       }
