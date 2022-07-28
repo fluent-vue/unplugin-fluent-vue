@@ -58,10 +58,10 @@ interface Dependency {
   importVariable: string
 }
 
-export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
+export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) => {
   return {
     name: 'unplugin-fluent-vue-external',
-    enforce: 'post',
+    enforce: meta.framework === 'webpack' ? 'post' : undefined,
     transformInclude(id: string) {
       return isVue(id) || isFtl(id)
     },

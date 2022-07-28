@@ -4,7 +4,7 @@ import { createUnplugin } from 'unplugin'
 import type { SFCPluginOptions } from '../types'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 
-export const unplugin = createUnplugin((options: SFCPluginOptions) => {
+export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
   const resolvedOptions = {
     blockType: 'fluent',
     ...options,
@@ -12,7 +12,7 @@ export const unplugin = createUnplugin((options: SFCPluginOptions) => {
 
   return {
     name: 'unplugin-fluent-vue-sfc',
-    enforce: 'post',
+    enforce: meta.framework === 'webpack' ? 'post' : undefined,
     transformInclude(id: string) {
       const { query } = parseVueRequest(id)
       return isCustomBlock(query, resolvedOptions)
