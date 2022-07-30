@@ -50,3 +50,24 @@ jobs:
 
       - name: Lint
         run: pnpm lint
+
+  test-examples:
+    runs-on: ubuntu-latest
+    name: Test build of example projects
+    steps:
+      - name: Checkout unplugin-fluent-vue
+        uses: actions/checkout@v3.0.2
+      - name: Checkout examples
+        uses: actions/checkout@v3.0.2
+        with:
+          repository: fluent-vue/examples
+          path: examples
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.2.0
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.x.x
+          run_install: true
+
+      - name: Test
+        run: node scripts/build-examples.mjs
