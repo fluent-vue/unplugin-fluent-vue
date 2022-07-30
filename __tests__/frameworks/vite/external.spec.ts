@@ -2,16 +2,16 @@ import { resolve } from 'path'
 import { describe, expect, it } from 'vitest'
 
 import vue3base from '@vitejs/plugin-vue'
-import compiler from '@vue/compiler-sfc'
 
-import { ExternalFluentPlugin } from '../../../../src/vite'
+import { ExternalFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
+import compiler from '@vue/compiler-sfc'
 
 const vue3 = () => vue3base({
   compiler,
 })
 
-const baseDir = resolve(__dirname, '../../..')
+const baseDir = resolve(__dirname, '../..')
 
 describe('Vite external', () => {
   it('works', async () => {

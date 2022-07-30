@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
 import vue3base from '@vitejs/plugin-vue'
-import compiler from '@vue/compiler-sfc'
 
-import { SFCFluentPlugin } from '../../../../src/vite'
+import { SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
+import compiler from '@vue/compiler-sfc'
 
 const vue3 = () => vue3base({
   compiler,

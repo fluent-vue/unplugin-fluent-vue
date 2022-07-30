@@ -4,7 +4,7 @@ exports[`Vite external > works 1`] = `
 "import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
 import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
 const _sfc_main = {}
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@fs/workspaces/unplugin-fluent-vue/node_modules/.pnpm/vue@3.2.37/node_modules/vue/dist/vue.runtime.esm-bundler.js\\"
 
 function _sfc_render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -66,7 +66,7 @@ return __returned__
 }
 
 }
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@fs/workspaces/unplugin-fluent-vue/node_modules/.pnpm/vue@3.2.37/node_modules/vue/dist/vue.runtime.esm-bundler.js\\"
 
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
