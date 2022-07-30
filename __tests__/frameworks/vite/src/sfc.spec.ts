@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 
 import vue3base from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
-import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 
 import { SFCFluentPlugin } from '../../../../src/vite'
 import { compile } from './util'
@@ -18,20 +17,6 @@ describe('Vite SFC', () => {
     const code = await compile({
       plugins: [
         vue3(),
-        SFCFluentPlugin(),
-      ],
-    }, '/fixtures/test.vue')
-
-    // Assert
-    expect(code).toMatchSnapshot()
-  })
-
-  it('works with vue 2', async () => {
-    // Arrange
-    // Act
-    const code = await compile({
-      plugins: [
-        vue2(),
         SFCFluentPlugin(),
       ],
     }, '/fixtures/test.vue')

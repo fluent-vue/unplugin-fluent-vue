@@ -53,8 +53,8 @@
     "*.d.ts"
   ],
   "scripts": {
-    "test": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test",
-    "test:coverage": "pnpm --filter \"test-*\" install && pnpm --filter \"test-*\" test -- --coverage",
+    "test": "vitest",
+    "test:coverage": "vitest  --coverage",
     "build": "tsup",
     "lint": "eslint .",
     "prepare": "husky install"
@@ -74,7 +74,8 @@
     "lint-staged": "13.0.3",
     "release-it": "15.2.0",
     "tsup": "6.2.0",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "vitest": "^0.19.1"
   },
   "lint-staged": {
     "*.js": "eslint --fix",
