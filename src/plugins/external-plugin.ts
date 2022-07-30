@@ -1,6 +1,5 @@
 import { join, relative } from 'path'
 import { stat as fsStat } from 'fs/promises'
-import type { VitePlugin } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 
 import MagicString from 'magic-string'
@@ -132,6 +131,6 @@ export default new FluentResource(${JSON.stringify(source)})
   }
 })
 
-export const vitePlugin: (options?: ExternalPluginOptions) => VitePlugin = unplugin.vite
+export const vitePlugin = unplugin.vite
 export const rollupPlugin = unplugin.rollup
 export const webpackPlugin = unplugin.webpack
