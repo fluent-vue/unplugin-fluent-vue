@@ -1,7 +1,8 @@
-import { compile } from './util'
 import { describe, expect, it } from 'vitest'
 
 import type { Stats } from 'webpack'
+
+import { compile } from './util'
 
 describe('Webpack SFC', () => {
   it('generates custom block code', async () => {

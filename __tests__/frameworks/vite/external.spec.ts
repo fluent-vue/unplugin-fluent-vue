@@ -1,11 +1,11 @@
 import { resolve } from 'path'
-import { ExternalFluentPlugin } from '../../../src/vite'
-import { compile } from './util'
 import { describe, expect, it } from 'vitest'
 
 import vue3base from '@vitejs/plugin-vue'
-
 import compiler from '@vue/compiler-sfc'
+
+import { ExternalFluentPlugin } from '../../../src/vite'
+import { compile } from './util'
 
 const vue3 = () => vue3base({
   compiler,

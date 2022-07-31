@@ -1,10 +1,11 @@
 import path from 'path'
-import type { SFCPluginOptions } from '../../../src/webpack'
-import { SFCFluentPlugin } from '../../../src/webpack'
 import webpack from 'webpack'
 import { Volume, createFsFromVolume } from 'memfs'
 
 import { VueLoaderPlugin } from 'vue-loader'
+
+import { SFCFluentPlugin } from '../../../src/webpack'
+import type { SFCPluginOptions } from '../../../src/webpack'
 
 export async function compile(fixture: string, options: Partial<SFCPluginOptions> = {}, hot = false): Promise<webpack.Stats> {
   const compilation = webpack({
