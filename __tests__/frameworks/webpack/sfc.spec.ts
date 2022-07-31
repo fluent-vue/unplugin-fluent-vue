@@ -1,6 +1,6 @@
+import { compile } from './util'
 import { describe, expect, it } from 'vitest'
 
-import { compile } from './util'
 import type { Stats } from 'webpack'
 
 describe('Webpack SFC', () => {
