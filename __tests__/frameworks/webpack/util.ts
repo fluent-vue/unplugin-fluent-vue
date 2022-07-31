@@ -4,12 +4,12 @@ import { Volume, createFsFromVolume } from 'memfs'
 
 import { VueLoaderPlugin } from 'vue-loader'
 
-import type { SFCPluginOptions } from '../../../../src/webpack'
-import { SFCFluentPlugin } from '../../../../src/webpack'
+import { SFCFluentPlugin } from '../../../src/webpack'
+import type { SFCPluginOptions } from '../../../src/webpack'
 
 export async function compile(fixture: string, options: Partial<SFCPluginOptions> = {}, hot = false): Promise<webpack.Stats> {
   const compilation = webpack({
-    context: path.resolve(__dirname, '../../..'),
+    context: path.resolve(__dirname, '../..'),
     entry: `./${fixture}`,
     externals: {
       'vue': 'Vue',

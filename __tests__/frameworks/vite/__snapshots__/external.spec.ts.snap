@@ -1,10 +1,15 @@
 // Vitest Snapshot v1
 
 exports[`Vite external > works 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
+"=== /fixtures/components/external.vue ===
+import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
 import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
 const _sfc_main = {}
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
+const _toDisplayString = window['Vue'].toDisplayString
+const _createElementVNode = window['Vue'].createElementVNode
+const _openBlock = window['Vue'].openBlock
+const _createElementBlock = window['Vue'].createElementBlock
+
 
 function _sfc_render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -48,11 +53,24 @@ _sfc_main.fluent['da'] = da_ftl
     }
   })
 }
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/components/external.vue\\"]])"
+export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/components/external.vue\\"]])
+
+=== /fixtures/ftl/da/components/external.vue.ftl ===
+
+import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+export default new FluentResource(\\"\\")
+
+
+=== /fixtures/ftl/en/components/external.vue.ftl ===
+
+import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+export default new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n    [one] added one photo\\\\n   *[other] added {$photoCount} new photo\\\\n  }to {$userGender ->\\\\n    [male] his stream\\\\n    [female] her stream\\\\n   *[other] their stream\\\\n  }.\\\\n\\")
+"
 `;
 
 exports[`Vite external > works with script setup 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.setup.vue\\");import en_ftl from '/fixtures/ftl/en/components/external.setup.vue.ftl?import';
+"=== /fixtures/components/external.setup.vue ===
+import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.setup.vue\\");import en_ftl from '/fixtures/ftl/en/components/external.setup.vue.ftl?import';
 const _sfc_main = {
   __name: 'external.setup',
   setup(__props, { expose }) {
@@ -66,7 +84,11 @@ return __returned__
 }
 
 }
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/vue\\"
+const _toDisplayString = window['Vue'].toDisplayString
+const _createElementVNode = window['Vue'].createElementVNode
+const _openBlock = window['Vue'].openBlock
+const _createElementBlock = window['Vue'].createElementBlock
+
 
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -108,5 +130,11 @@ if (__HOT_API__) {
     }
   })
 }
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/components/external.setup.vue\\"]])"
+export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/components/external.setup.vue\\"]])
+
+=== /fixtures/ftl/en/components/external.setup.vue.ftl ===
+
+import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+export default new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n    [one] added one photo\\\\n   *[other] added {$photoCount} new photo\\\\n  } to {$userGender ->\\\\n    [male] his stream\\\\n    [female] her stream\\\\n   *[other] their stream\\\\n  }.\\\\n\\")
+"
 `;

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
 import vue3base from '@vitejs/plugin-vue'
-import compiler from '@vue/compiler-sfc'
 
-import { SFCFluentPlugin } from '../../../../src/vite'
+import compiler from '@vue/compiler-sfc'
+import { SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
 
 const vue3 = () => vue3base({
@@ -32,7 +32,7 @@ describe('Vite SFC', () => {
       plugins: [
         vue3(),
         SFCFluentPlugin({
-          blockType: 'custom',
+          blockType: 'i18n',
         }),
       ],
     }, '/fixtures/blockType.vue')
