@@ -1,83 +1,56 @@
 lockfileVersion: 5.4
 
-importers:
+specifiers:
+  '@antfu/eslint-config-ts': 0.25.2
+  '@release-it-plugins/lerna-changelog': 5.0.0
+  '@rollup/pluginutils': ^4.2.1
+  '@types/node': 18.6.1
+  '@vitejs/plugin-vue': ^3.0.1
+  '@vue/compiler-sfc': ^3.2.37
+  c8: 7.12.0
+  eslint: 8.20.0
+  execa: ^6.1.0
+  husky: 8.0.1
+  lint-staged: 13.0.3
+  magic-string: ^0.26.2
+  memfs: ^3.4.7
+  release-it: 15.2.0
+  tsup: 6.2.0
+  typescript: 4.7.4
+  unplugin: ^0.8.0
+  vite: ^3.0.4
+  vite-plugin-externals: ^0.5.1
+  vitest: 0.20.2
+  vue: ^3.2.37
+  vue-loader: ^17.0.0
+  webpack: ^5.74.0
 
-  .:
-    specifiers:
-      '@antfu/eslint-config-ts': 0.25.2
-      '@release-it-plugins/lerna-changelog': 5.0.0
-      '@rollup/pluginutils': ^4.2.1
-      '@types/node': 18.6.1
-      '@vitejs/plugin-vue': ^3.0.1
-      '@vue/compiler-sfc': ^3.2.37
-      c8: 7.12.0
-      eslint: 8.20.0
-      execa: ^6.1.0
-      husky: 8.0.1
-      lint-staged: 13.0.3
-      magic-string: ^0.26.2
-      memfs: ^3.4.7
-      release-it: 15.2.0
-      tsup: 6.2.0
-      typescript: 4.7.4
-      unplugin: ^0.8.0
-      vite: ^3.0.4
-      vite-plugin-externals: ^0.5.1
-      vitest: ^0.19.1
-      vue: ^3.2.37
-      vue-loader: ^17.0.0
-      webpack: ^5.74.0
-    dependencies:
-      '@rollup/pluginutils': 4.2.1
-      magic-string: 0.26.2
-      unplugin: 0.8.0_vite@3.0.4+webpack@5.74.0
-    devDependencies:
-      '@antfu/eslint-config-ts': 0.25.2_he2ccbldppg44uulnyq4rwocfa
-      '@release-it-plugins/lerna-changelog': 5.0.0_release-it@15.2.0
-      '@types/node': 18.6.1
-      '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
-      '@vue/compiler-sfc': 3.2.37
-      c8: 7.12.0
-      eslint: 8.20.0
-      execa: 6.1.0
-      husky: 8.0.1
-      lint-staged: 13.0.3
-      memfs: 3.4.7
-      release-it: 15.2.0
-      tsup: 6.2.0_typescript@4.7.4
-      typescript: 4.7.4
-      vite: 3.0.4
-      vite-plugin-externals: 0.5.1_vite@3.0.4
-      vitest: 0.19.1_c8@7.12.0
-      vue: 3.2.37
-      vue-loader: 17.0.0_webpack@5.74.0
-      webpack: 5.74.0
+dependencies:
+  '@rollup/pluginutils': 4.2.1
+  magic-string: 0.26.2
+  unplugin: 0.8.0_vite@3.0.4+webpack@5.74.0
 
-  __tests__/frameworks/vite:
-    specifiers:
-      '@vitejs/plugin-vue': 3.0.1
-      '@vue/compiler-sfc': 3.2.37
-      vite: 3.0.3
-      vue: 3.2.37
-    devDependencies:
-      '@vitejs/plugin-vue': 3.0.1_vite@3.0.3+vue@3.2.37
-      '@vue/compiler-sfc': 3.2.37
-      vite: 3.0.3
-      vue: 3.2.37
-
-  __tests__/frameworks/webpack:
-    specifiers:
-      '@vue/compiler-sfc': 3.2.37
-      memfs: 3.4.7
-      vue: 3.2.37
-      vue-loader: 17.0.0
-      webpack: 5.74.0
-    devDependencies:
-      '@vue/compiler-sfc': 3.2.37
-      memfs: 3.4.7
-      vue: 3.2.37
-      vue-loader: 17.0.0_webpack@5.74.0
-      webpack: 5.74.0
+devDependencies:
+  '@antfu/eslint-config-ts': 0.25.2_he2ccbldppg44uulnyq4rwocfa
+  '@release-it-plugins/lerna-changelog': 5.0.0_release-it@15.2.0
+  '@types/node': 18.6.1
+  '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
+  '@vue/compiler-sfc': 3.2.37
+  c8: 7.12.0
+  eslint: 8.20.0
+  execa: 6.1.0
+  husky: 8.0.1
+  lint-staged: 13.0.3
+  memfs: 3.4.7
+  release-it: 15.2.0
+  tsup: 6.2.0_typescript@4.7.4
+  typescript: 4.7.4
+  vite: 3.0.4
+  vite-plugin-externals: 0.5.1_vite@3.0.4
+  vitest: 0.20.2_c8@7.12.0
+  vue: 3.2.37
+  vue-loader: 17.0.0_webpack@5.74.0
+  webpack: 5.74.0
 
 packages:
 
@@ -682,17 +655,6 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.30.0
       eslint-visitor-keys: 3.3.0
-    dev: true
-
-  /@vitejs/plugin-vue/3.0.1_vite@3.0.3+vue@3.2.37:
-    resolution: {integrity: sha512-Ll9JgxG7ONIz/XZv3dssfoMUDu9qAnlJ+km+pBA0teYSXzwPCIzS/e1bmwNYl5dcQGs677D21amgfYAnzMl17A==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
-      vite: ^3.0.0
-      vue: ^3.2.25
-    dependencies:
-      vite: 3.0.3
-      vue: 3.2.37
     dev: true
 
   /@vitejs/plugin-vue/3.0.1_vite@3.0.4+vue@3.2.37:
@@ -5712,33 +5674,6 @@ packages:
       vite: 3.0.4
     dev: true
 
-  /vite/3.0.3:
-    resolution: {integrity: sha512-sDIpIcl3mv1NUaSzZwiXGEy1ZoWwwC2vkxUHY6yiDacR6zf//ZFuBJrozO62gedpE43pmxnLATNR5IYUdAEkMQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.14.48
-      postcss: 8.4.14
-      resolve: 1.22.1
-      rollup: 2.75.7
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vite/3.0.4:
     resolution: {integrity: sha512-NU304nqnBeOx2MkQnskBQxVsa0pRAH5FphokTGmyy8M3oxbvw7qAXts2GORxs+h/2vKsD+osMhZ7An6yK6F1dA==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -5765,8 +5700,8 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitest/0.19.1_c8@7.12.0:
-    resolution: {integrity: sha512-E/ZXpFMUahn731wzhMBNzWRp4mGgiZFT0xdHa32cbNO0CSaHpE9hTfteEU247Gi2Dula8uXo5vvrNB6dtszmQA==}
+  /vitest/0.20.2_c8@7.12.0:
+    resolution: {integrity: sha512-AFXTHrwG4d2OO6SAL8WP5ZkOwLtgeF4tlrHfXFqrHc+5chNegeR53pge0lv/C4316SqJ2DbYaUBH8vh3CdF+BQ==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
