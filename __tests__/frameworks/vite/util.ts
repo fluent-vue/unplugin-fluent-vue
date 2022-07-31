@@ -1,7 +1,9 @@
 import { resolve, sep } from 'path'
 
-import type { InlineConfig } from 'vite'
+import type { InlineConfig, ModuleNode } from 'vite'
 import { createServer } from 'vite'
+
+import { viteExternalsPlugin } from 'vite-plugin-externals'
 
 const baseDir = resolve(__dirname, '../..')
 
@@ -11,22 +13,29 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
     ...options,
     plugins: [
       ...options.plugins,
-      {
-        name: 'externals',
-        resolveId(id) {
-          if (id === 'vue' || id === '@fluent/bundle')
-            return id
-        },
-        load(id) {
-          if (id === 'vue' || id === '@fluent/bundle')
-            return 'export default {}'
-        },
-      },
+      viteExternalsPlugin({
+        'vue': 'Vue',
+        '@fluent/bundle': 'FluentBundle',
+      }),
     ],
   })
 
-  const output = await vite.transformRequest(file)
-  const code = output?.code
+  await vite.transformRequest(file)
+
+  const module = await vite.moduleGraph.getModuleByUrl(file)
+
+  const getAllModules = (module: ModuleNode): ModuleNode[] => [module].concat([...module.importedModules.values()].flatMap(getAllModules))
+
+  const modules = await Promise.all(getAllModules(module)
+    .map(async module => ({
+      transform: await vite.transformRequest(module.url),
+      module,
+    })))
+
+  const code = modules
+    .filter(module => module.transform)
+    .filter(module => !module.module.url.includes('node_modules'))
+    .map(module => `=== ${module.module.url} ===\n${module.transform.code}`).join('\n\n')
 
   // normalize paths
   return code?.replaceAll(baseDir.replaceAll(sep, '/'), '')

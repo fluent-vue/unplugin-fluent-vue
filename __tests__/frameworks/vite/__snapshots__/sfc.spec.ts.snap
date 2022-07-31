@@ -1,8 +1,13 @@
 // Vitest Snapshot v1
 
 exports[`Vite SFC > generates custom block code 1`] = `
-"import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/test.vue\\");const _sfc_main = {}
-import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@fs/workspaces/unplugin-fluent-vue/node_modules/.pnpm/vue@3.2.37/node_modules/vue/dist/vue.runtime.esm-bundler.js\\"
+"=== /fixtures/test.vue ===
+import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/test.vue\\");const _sfc_main = {}
+const _toDisplayString = window['Vue'].toDisplayString
+const _createElementVNode = window['Vue'].createElementVNode
+const _openBlock = window['Vue'].openBlock
+const _createElementBlock = window['Vue'].createElementBlock
+
 
 function _sfc_render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -26,7 +31,57 @@ import.meta.hot.accept(mod => {
   }
 })
 import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
-export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/test.vue\\"]])"
+export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/test.vue\\"]])
+
+=== /fixtures/test.vue?vue&type=fluent&index=0&locale=en&lang.fluent ===
+
+const FluentResource = window['FluentBundle'].FluentResource
+
+
+export default function (Component) {
+  const target = Component.options || Component
+  target.fluent = target.fluent || {}
+  target.fluent['en'] = new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n     [one] added one photo\\\\n    *[other] added {$photoCount} new photos\\\\n  } to {$userGender ->\\\\n     [male] his stream\\\\n     [female] her stream\\\\n    *[other] their stream\\\\n  }.\\")
+}
+"
 `;
 
-exports[`Vite SFC > supports custom blockType 1`] = `undefined`;
+exports[`Vite SFC > supports custom blockType 1`] = `
+"=== /fixtures/blockType.vue ===
+import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/blockType.vue\\");const _sfc_main = {}
+const _toDisplayString = window['Vue'].toDisplayString
+
+
+function _sfc_render(_ctx, _cache) {
+  return _toDisplayString(_ctx.$t('test-key'))
+}
+
+import block0 from \\"/fixtures/blockType.vue?vue&type=i18n&index=0&locale=en&lang.i18n\\"
+if (typeof block0 === 'function') block0(_sfc_main)
+
+_sfc_main.__hmrId = \\"8c542073\\"
+typeof __VUE_HMR_RUNTIME__ !== 'undefined' && __VUE_HMR_RUNTIME__.createRecord(_sfc_main.__hmrId, _sfc_main)
+import.meta.hot.accept(mod => {
+  if (!mod) return
+  const { default: updated, _rerender_only } = mod
+  if (_rerender_only) {
+    __VUE_HMR_RUNTIME__.rerender(updated.__hmrId, updated.render)
+  } else {
+    __VUE_HMR_RUNTIME__.reload(updated.__hmrId, updated)
+  }
+})
+import _export_sfc from '/@id/__x00__plugin-vue:export-helper'
+export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__file',\\"/fixtures/blockType.vue\\"]])
+
+=== /fixtures/blockType.vue?vue&type=i18n&index=0&locale=en&lang.i18n ===
+
+const FluentResource = window['FluentBundle'].FluentResource
+
+
+export default function (Component) {
+  const target = Component.options || Component
+  target.fluent = target.fluent || {}
+  target.fluent['en'] = new FluentResource(\\"test-key = test-value\\")
+}
+"
+`;
