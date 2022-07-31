@@ -38,5 +38,7 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
     .map(module => `=== ${module.module.url} ===\n${module.transform.code}`).join('\n\n')
 
   // normalize paths
-  return code?.replaceAll(baseDir.replaceAll(sep, '/'), '')
+  return code
+    ?.replaceAll(baseDir.replaceAll(sep, '/'), '')
+    .replace(/\/@(fs|id).*?node_modules\//g, '')
 }
