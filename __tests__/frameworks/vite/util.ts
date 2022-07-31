@@ -41,4 +41,5 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
   return code
     ?.replaceAll(baseDir.replaceAll(sep, '/'), '')
     .replace(/\/@(fs|id).*?node_modules\//g, '')
+    .replaceAll('\\r\\n', '\\n')
 }

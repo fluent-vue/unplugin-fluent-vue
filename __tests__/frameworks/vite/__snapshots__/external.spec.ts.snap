@@ -135,6 +135,6 @@ export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__f
 === /fixtures/ftl/en/components/external.setup.vue.ftl ===
 
 import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
-export default new FluentResource(\\"# Simple things are simple.\\\\r\\\\nhello-user = Hello, {$userName}!\\\\r\\\\n\\\\r\\\\n# Complex things are possible.\\\\r\\\\nshared-photos =\\\\r\\\\n  {$userName} {$photoCount ->\\\\r\\\\n    [one] added one photo\\\\r\\\\n   *[other] added {$photoCount} new photo\\\\r\\\\n  } to {$userGender ->\\\\r\\\\n    [male] his stream\\\\r\\\\n    [female] her stream\\\\r\\\\n   *[other] their stream\\\\r\\\\n  }.\\\\r\\\\n\\")
+export default new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n    [one] added one photo\\\\n   *[other] added {$photoCount} new photo\\\\n  } to {$userGender ->\\\\n    [male] his stream\\\\n    [female] her stream\\\\n   *[other] their stream\\\\n  }.\\\\n\\")
 "
 `;
