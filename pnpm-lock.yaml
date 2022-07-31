@@ -5,25 +5,25 @@ specifiers:
   '@release-it-plugins/lerna-changelog': 5.0.0
   '@rollup/pluginutils': ^4.2.1
   '@types/node': 18.6.1
-  '@vitejs/plugin-vue': ^3.0.1
-  '@vue/compiler-sfc': ^3.2.37
+  '@vitejs/plugin-vue': 3.0.1
+  '@vue/compiler-sfc': 3.2.37
   c8: 7.12.0
   eslint: 8.20.0
-  execa: ^6.1.0
+  execa: 6.1.0
   husky: 8.0.1
   lint-staged: 13.0.3
   magic-string: ^0.26.2
-  memfs: ^3.4.7
+  memfs: 3.4.7
   release-it: 15.2.0
   tsup: 6.2.0
   typescript: 4.7.4
   unplugin: ^0.8.0
-  vite: ^3.0.4
-  vite-plugin-externals: ^0.5.1
+  vite: 3.0.4
+  vite-plugin-externals: 0.5.1
   vitest: 0.20.2
-  vue: ^3.2.37
-  vue-loader: ^17.0.0
-  webpack: ^5.74.0
+  vue: 3.2.37
+  vue-loader: 17.0.0
+  webpack: 5.74.0
 
 dependencies:
   '@rollup/pluginutils': 4.2.1
