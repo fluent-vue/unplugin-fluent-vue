@@ -6,8 +6,8 @@ specifiers:
   '@rollup/pluginutils': ^4.2.1
   '@types/node': 18.6.1
   '@vitejs/plugin-vue': 3.0.3
+  '@vitest/coverage-c8': ^0.22.1
   '@vue/compiler-sfc': 3.2.38
-  c8: 7.12.0
   eslint: 8.23.0
   execa: 6.1.0
   husky: 8.0.1
@@ -35,8 +35,8 @@ devDependencies:
   '@release-it-plugins/lerna-changelog': 5.0.0_release-it@15.4.1
   '@types/node': 18.6.1
   '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
+  '@vitest/coverage-c8': 0.22.1
   '@vue/compiler-sfc': 3.2.38
-  c8: 7.12.0
   eslint: 8.23.0
   execa: 6.1.0
   husky: 8.0.1
@@ -687,6 +687,24 @@ packages:
       vue: 3.2.38
     dev: true
 
+  /@vitest/coverage-c8/0.22.1:
+    resolution: {integrity: sha512-KOOYpO7EGpaF+nD8GD+Y05D0JtZp12NUu6DdLXvBPqSOPo2HkZ7KNBtfR0rb6gOy3NLtGiWTYTzCwhajgb2HlA==}
+    dependencies:
+      c8: 7.12.0
+      vitest: 0.22.1
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - supports-color
+      - terser
+    dev: true
+
   /@vue/compiler-core/3.2.38:
     resolution: {integrity: sha512-/FsvnSu7Z+lkd/8KXMa4yYNUiqQrI22135gfsQYVGuh5tqEgOB0XqrUdb/KnCLa5+TmQLPwvyUnKMyCpu+SX3Q==}
     dependencies:
@@ -1174,7 +1192,7 @@ packages:
       foreground-child: 2.0.0
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-report: 3.0.0
-      istanbul-reports: 3.1.4
+      istanbul-reports: 3.1.5
       rimraf: 3.0.2
       test-exclude: 6.0.0
       v8-to-istanbul: 9.0.1
@@ -3545,8 +3563,8 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /istanbul-reports/3.1.4:
-    resolution: {integrity: sha512-r1/DshN4KSE7xWEknZLLLLDn5CJybV3nw01VTkp6D5jzLuELlcbudfj/eSQFvrKsJuTVCGnePO7ho82Nw9zzfw==}
+  /istanbul-reports/3.1.5:
+    resolution: {integrity: sha512-nUsEMa9pBt/NOHqbcbeJEgqIlY/K7rVWUX6Lql2orY5e9roQOthbR3vtY4zzf2orPELg80fnxxk9zUyPlgwD1w==}
     engines: {node: '>=8'}
     dependencies:
       html-escaper: 2.0.2
