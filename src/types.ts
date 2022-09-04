@@ -2,6 +2,7 @@ export interface ExternalPluginOptions {
   baseDir: string
   ftlDir: string
   locales: string[]
+  checkSyntax?: boolean
 }
 
 export interface SFCPluginOptions {

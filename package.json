@@ -60,6 +60,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fluent/syntax": "^0.18.1",
     "@rollup/pluginutils": "^4.2.1",
     "magic-string": "^0.26.2",
     "unplugin": "^0.9.0"
