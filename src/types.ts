@@ -7,6 +7,7 @@ export interface ExternalPluginOptions {
 
 export interface SFCPluginOptions {
   blockType?: string
+  checkSyntax?: boolean
 }
 
 export interface InsertInfo {

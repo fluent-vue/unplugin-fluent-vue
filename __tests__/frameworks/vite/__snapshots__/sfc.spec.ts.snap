@@ -3,11 +3,7 @@
 exports[`Vite SFC > generates custom block code 1`] = `
 "=== /fixtures/test.vue ===
 import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/test.vue\\");const _sfc_main = {}
-const _toDisplayString = window['Vue'].toDisplayString
-const _createElementVNode = window['Vue'].createElementVNode
-const _openBlock = window['Vue'].openBlock
-const _createElementBlock = window['Vue'].createElementBlock
-
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/virtual:empty:vue\\"
 
 function _sfc_render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -35,8 +31,7 @@ export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__f
 
 === /fixtures/test.vue?vue&type=fluent&index=0&locale=en&lang.fluent ===
 
-const FluentResource = window['FluentBundle'].FluentResource
-
+import { FluentResource } from '/@id/virtual:empty:fluent-bundle'
 
 export default function (Component) {
   const target = Component.options || Component
@@ -49,8 +44,7 @@ export default function (Component) {
 exports[`Vite SFC > supports custom blockType 1`] = `
 "=== /fixtures/blockType.vue ===
 import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/blockType.vue\\");const _sfc_main = {}
-const _toDisplayString = window['Vue'].toDisplayString
-
+import { toDisplayString as _toDisplayString } from \\"/@id/virtual:empty:vue\\"
 
 function _sfc_render(_ctx, _cache) {
   return _toDisplayString(_ctx.$t('test-key'))
@@ -75,8 +69,7 @@ export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__f
 
 === /fixtures/blockType.vue?vue&type=i18n&index=0&locale=en&lang.i18n ===
 
-const FluentResource = window['FluentBundle'].FluentResource
-
+import { FluentResource } from '/@id/virtual:empty:fluent-bundle'
 
 export default function (Component) {
   const target = Component.options || Component

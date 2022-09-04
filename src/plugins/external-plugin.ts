@@ -1,13 +1,12 @@
 import { join, relative } from 'path'
 import { stat as fsStat } from 'fs/promises'
 import { createUnplugin } from 'unplugin'
-import type { Junk } from '@fluent/syntax'
-import { columnOffset, lineOffset, parse } from '@fluent/syntax'
 
 import MagicString from 'magic-string'
 import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
 
 import type { ExternalPluginOptions, InsertInfo } from '../types'
+import { getSyntaxErrors } from './ftl/parse'
 
 function getInsertInfo(source: string): InsertInfo {
   let target = null
@@ -125,18 +124,9 @@ if (__HOT_API__) {
 
       if (isFtl(id)) {
         if (options.checkSyntax) {
-          const parsed = parse(source, { withSpans: true })
-          const junks = parsed.body.filter(x => x.type === 'Junk') as Junk[]
-          const errors = junks.map(x => x.annotations).flat()
-          if (errors.length > 0) {
-            const errorsText = errors.map((x) => {
-              const line = lineOffset(source, x.span.start) + 1
-              const column = columnOffset(source, x.span.start) + 1
-              return `    ${x.code}: ${x.message} (${line}:${column})`
-            }).join('\n')
-
-            this.error(`Fluent parse errors:\n${errorsText}`)
-          }
+          const errorsText = getSyntaxErrors(source)
+          if (errorsText)
+            this.error(errorsText)
         }
 
         return `

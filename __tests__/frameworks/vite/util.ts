@@ -3,8 +3,6 @@ import { resolve, sep } from 'path'
 import type { InlineConfig, ModuleNode } from 'vite'
 import { createServer } from 'vite'
 
-import { viteExternalsPlugin } from 'vite-plugin-externals'
-
 const baseDir = resolve(__dirname, '../..')
 
 export async function compile(options: InlineConfig, file: string): Promise<string | undefined> {
@@ -13,10 +11,21 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
     ...options,
     plugins: [
       ...options.plugins,
-      viteExternalsPlugin({
-        'vue': 'Vue',
-        '@fluent/bundle': 'FluentBundle',
-      }),
+      {
+        name: 'externals',
+        config(config) {
+          const newAlias = [
+            ...(config?.resolve?.alias ?? []),
+            { find: /^vue$/, replacement: 'virtual:empty:vue' },
+            { find: /^@fluent\/bundle$/, replacement: 'virtual:empty:fluent-bundle' },
+          ]
+
+          config.resolve = {
+            ...(config.resolve ?? {}),
+            alias: newAlias,
+          }
+        },
+      },
     ],
   })
 
