@@ -3,10 +3,12 @@ import { createUnplugin } from 'unplugin'
 
 import type { SFCPluginOptions } from '../types'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
+import { getSyntaxErrors } from './ftl/parse'
 
 export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
   const resolvedOptions = {
     blockType: 'fluent',
+    checkSyntax: true,
     ...options,
   }
 
@@ -33,6 +35,12 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
         // I have no idea why webpack processes this file multiple times
         if (source.includes('FluentResource') || source.includes('unplugin-fluent-vue-sfc'))
           return source
+
+        if (resolvedOptions.checkSyntax) {
+          const errorsText = getSyntaxErrors(data)
+          if (errorsText)
+            this.error(errorsText)
+        }
 
         return `
 import { FluentResource } from '@fluent/bundle'

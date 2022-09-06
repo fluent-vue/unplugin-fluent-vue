@@ -5,11 +5,7 @@ exports[`Vite external > works 1`] = `
 import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";import.meta.hot = __vite__createHotContext(\\"/fixtures/components/external.vue\\");import da_ftl from '/fixtures/ftl/da/components/external.vue.ftl?import';
 import en_ftl from '/fixtures/ftl/en/components/external.vue.ftl?import';
 const _sfc_main = {}
-const _toDisplayString = window['Vue'].toDisplayString
-const _createElementVNode = window['Vue'].createElementVNode
-const _openBlock = window['Vue'].openBlock
-const _createElementBlock = window['Vue'].createElementBlock
-
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/virtual:empty:vue\\"
 
 function _sfc_render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -57,13 +53,13 @@ export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__f
 
 === /fixtures/ftl/da/components/external.vue.ftl ===
 
-import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+import { FluentResource } from '/@id/virtual:empty:fluent-bundle'
 export default new FluentResource(\\"\\")
 
 
 === /fixtures/ftl/en/components/external.vue.ftl ===
 
-import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+import { FluentResource } from '/@id/virtual:empty:fluent-bundle'
 export default new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n    [one] added one photo\\\\n   *[other] added {$photoCount} new photo\\\\n  }to {$userGender ->\\\\n    [male] his stream\\\\n    [female] her stream\\\\n   *[other] their stream\\\\n  }.\\\\n\\")
 "
 `;
@@ -84,11 +80,7 @@ return __returned__
 }
 
 }
-const _toDisplayString = window['Vue'].toDisplayString
-const _createElementVNode = window['Vue'].createElementVNode
-const _openBlock = window['Vue'].openBlock
-const _createElementBlock = window['Vue'].createElementBlock
-
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"/@id/virtual:empty:vue\\"
 
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, [
@@ -134,7 +126,7 @@ export default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__f
 
 === /fixtures/ftl/en/components/external.setup.vue.ftl ===
 
-import { FluentResource } from '.vite-plugin-externals/@fluent/bundle.js'
+import { FluentResource } from '/@id/virtual:empty:fluent-bundle'
 export default new FluentResource(\\"# Simple things are simple.\\\\nhello-user = Hello, {$userName}!\\\\n\\\\n# Complex things are possible.\\\\nshared-photos =\\\\n  {$userName} {$photoCount ->\\\\n    [one] added one photo\\\\n   *[other] added {$photoCount} new photo\\\\n  } to {$userGender ->\\\\n    [male] his stream\\\\n    [female] her stream\\\\n   *[other] their stream\\\\n  }.\\\\n\\")
 "
 `;

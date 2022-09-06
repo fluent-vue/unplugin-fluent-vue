@@ -6,6 +6,7 @@ import MagicString from 'magic-string'
 import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
 
 import type { ExternalPluginOptions, InsertInfo } from '../types'
+import { getSyntaxErrors } from './ftl/parse'
 
 function getInsertInfo(source: string): InsertInfo {
   let target = null
@@ -58,6 +59,8 @@ interface Dependency {
 }
 
 export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) => {
+  options.checkSyntax = options.checkSyntax ?? false
+
   return {
     name: 'unplugin-fluent-vue-external',
     enforce: meta.framework === 'webpack' ? 'post' : undefined,
@@ -120,6 +123,12 @@ if (__HOT_API__) {
       }
 
       if (isFtl(id)) {
+        if (options.checkSyntax) {
+          const errorsText = getSyntaxErrors(source)
+          if (errorsText)
+            this.error(errorsText)
+        }
+
         return `
 import { FluentResource } from '@fluent/bundle'
 export default new FluentResource(${JSON.stringify(source)})
