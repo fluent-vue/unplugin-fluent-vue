@@ -39,6 +39,7 @@ import {
 
 export default defineConfig({
   plugins: [
+    vue(),
     // Choose one of the following:
     SFCFluentPlugin({ // define messages in SFCs
       blockType: 'fluent', // default 'fluent' - name of the block in SFCs
