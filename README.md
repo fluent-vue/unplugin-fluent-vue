@@ -14,3 +14,44 @@
     <img src="https://img.shields.io/github/license/fluent-vue/unplugin-fluent-vue" alt="GitHub license">
   </a>
 </p>
+
+[fluent-vue](https://github.com/fluent-vue/fluent-vue) plugin for Vite, Webpack and Rollup (thanks to [unplugin](https://github.com/unjs/unplugin)).
+
+It adds support for defining Fluent messages in Vue SFCs and external files.
+
+## Installation
+
+```bash
+npm install unplugin-fluent-vue --save-dev
+```
+
+## Usage
+
+### Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite'
+import {
+  SFCFluentPlugin,
+  ExternalFluentPlugin,
+} from 'unplugin-fluent-vue/vite'
+
+export default defineConfig({
+  plugins: [
+    // Choose one of the following:
+    SFCFluentPlugin({ // define messages in SFCs
+      blockType: 'fluent', // default 'fluent' - name of the block in SFCs
+      checkSyntax: true, // default true - whether to check syntax of the messages
+    }),
+    ExternalFluentPlugin({ // define messages in external ftl files
+      baseDir: path.resolve('src'), // required - base directory for Vue files
+      ftlDir: path.resolve('src/locales'), // required - directory with ftl files
+      locales: ['en', 'da'], // required - list of locales
+      checkSyntax: true, // default true - whether to check syntax of the messages
+    }),
+  ],
+})
+```
+
+Docs: https://fluent-vue.demivan.me/integrations/unplugin.html
