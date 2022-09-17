@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "before:init": ["pnpm lint", "pnpm test -- -- --run"],
+    "before:init": ["pnpm lint", "pnpm test -- --run"],
     "after:bump": "pnpm build"
   },
   "github": {
