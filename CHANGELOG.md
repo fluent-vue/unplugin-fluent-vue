@@ -6,8 +6,3 @@
 
 #### Committers: 1
 - Ivan Demchuk ([@Demivan](https://github.com/Demivan))
-
-## 0.0.3 (2022-07-30)
-
-
-
