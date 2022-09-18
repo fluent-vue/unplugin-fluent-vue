@@ -17,7 +17,7 @@
 
 [fluent-vue](https://github.com/fluent-vue/fluent-vue) plugin for Vite, Webpack and Rollup (thanks to [unplugin](https://github.com/unjs/unplugin)).
 
-It adds support for defining Fluent messages in Vue SFCs and external files.
+It adds support for defining Fluent messages in Vue SFCs and external ftl files.
 
 ## Installation
 
