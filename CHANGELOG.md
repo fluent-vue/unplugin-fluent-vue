@@ -1,8 +1,9 @@
 
-## 0.1.0 (2022-09-17)
+## 1.0.0 (2022-09-18)
 
-#### :star: New Features
-* [#22](https://github.com/fluent-vue/unplugin-fluent-vue/pull/22) Report fluent syntax errors ([@Demivan](https://github.com/Demivan))
+#### :star: Features
 
-#### Committers: 1
-- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+* Migrate functionality of `fluent-vue-loader` and `rollup-plugin-fluent-vue`
+* Allow defining locale messages in Vue SFCs
+* Allow defining locale messages in external ftl files
+* [#22](https://github.com/fluent-vue/unplugin-fluent-vue/pull/22) Report fluent syntax errors
