@@ -33,7 +33,19 @@ describe('Error checking', () => {
     await expect(code).rejects.toThrowErrorMatchingInlineSnapshot(`
       "Fluent parse errors:
           E0003: Expected token: \\"}\\" (2:31)
-          E0010: Expected one of the variants to be marked as default (*) (9:3)"
+      1 |  # Simple things are simple.
+      2 |  hello-user = Hello, {$userName!
+        |                                ^
+      3 |  
+      4 |  # Complex things are possible.
+          E0010: Expected one of the variants to be marked as default (*) (9:3)
+      7  |      [one] added one photo
+      8  |      [other] added {$photoCount} new photo
+      9  |    }to {$userGender ->
+         |    ^
+      10 |      [male] his stream
+      11 |      [female] her stream
+      "
     `)
   })
 
@@ -53,7 +65,18 @@ describe('Error checking', () => {
     await expect(code).rejects.toThrowErrorMatchingInlineSnapshot(`
       "Fluent parse errors:
           E0003: Expected token: \\"}\\" (2:31)
-          E0010: Expected one of the variants to be marked as default (*) (9:3)"
+      1 |  # Simple things are simple.
+      2 |  hello-user = Hello, {$userName!
+        |                                ^
+      3 |  
+      4 |  # Complex things are possible.
+          E0010: Expected one of the variants to be marked as default (*) (9:3)
+      7  |      [one] added one photo
+      8  |      [other] added {$photoCount} new photo
+      9  |    }to {$userGender ->
+         |    ^
+      10 |      [male] his stream
+      11 |      [female] her stream"
     `)
   })
 })
