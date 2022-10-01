@@ -59,7 +59,20 @@ interface Dependency {
 }
 
 export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) => {
-  options.checkSyntax = options.checkSyntax ?? false
+  const resolvedOptions = {
+    checkSyntax: true,
+    getFtlPath: undefined as ((locale: string, vuePath: string) => string) | undefined,
+    ...options,
+  }
+
+  if ('getFtlPath' in options) {
+    resolvedOptions.getFtlPath = options.getFtlPath
+  }
+  else {
+    resolvedOptions.getFtlPath = (locale: string, vuePath: string) => {
+      return join(options.ftlDir, locale, `${relative(options.baseDir, vuePath)}.ftl`)
+    }
+  }
 
   return {
     name: 'unplugin-fluent-vue-external',
@@ -73,11 +86,9 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
 
         const { insertPos, target } = getInsertInfo(source)
 
-        const relativePath = relative(options.baseDir, id)
-
         const dependencies: Dependency[] = []
         for (const locale of options.locales) {
-          const ftlPath = normalizePath(join(options.ftlDir, locale, `${relativePath}.ftl`))
+          const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
           const ftlExists = await fileExists(ftlPath)
 
           if (ftlExists) {
