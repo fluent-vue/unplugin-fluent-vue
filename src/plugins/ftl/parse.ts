@@ -23,7 +23,7 @@ export function generateCodeFrame(
   line: number,
   column: number,
 ): string {
-  const lines = source.split('\n')
+  const lines = source.split(/\r?\n/)
   const start = Math.max(line - RANGE - 1, 0)
   const end = Math.min(lines.length, line + RANGE)
 

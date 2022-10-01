@@ -44,8 +44,7 @@ describe('Error checking', () => {
       9  |    }to {$userGender ->
          |    ^
       10 |      [male] his stream
-      11 |      [female] her stream
-      "
+      11 |      [female] her stream"
     `)
   })
 
