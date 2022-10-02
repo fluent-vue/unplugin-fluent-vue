@@ -9,7 +9,7 @@ specifiers:
   '@vitejs/plugin-vue': 3.1.0
   '@vitest/coverage-c8': 0.23.4
   '@vue/compiler-sfc': 3.2.40
-  dotenv-cli: ^6.0.0
+  dotenv-cli: 6.0.0
   eslint: 8.24.0
   execa: 6.1.0
   husky: 8.0.1
