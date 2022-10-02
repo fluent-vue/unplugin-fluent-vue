@@ -9,6 +9,7 @@ specifiers:
   '@vitejs/plugin-vue': 3.1.0
   '@vitest/coverage-c8': 0.23.4
   '@vue/compiler-sfc': 3.2.40
+  dotenv-cli: ^6.0.0
   eslint: 8.24.0
   execa: 6.1.0
   husky: 8.0.1
@@ -38,6 +39,7 @@ devDependencies:
   '@vitejs/plugin-vue': 3.1.0_vite@3.1.4+vue@3.2.40
   '@vitest/coverage-c8': 0.23.4
   '@vue/compiler-sfc': 3.2.40
+  dotenv-cli: 6.0.0
   eslint: 8.24.0
   execa: 6.1.0
   husky: 8.0.1
@@ -1753,6 +1755,26 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       is-obj: 2.0.0
+    dev: true
+
+  /dotenv-cli/6.0.0:
+    resolution: {integrity: sha512-qXlCOi3UMDhCWFKe0yq5sg3X+pJAz+RQDiFN38AMSbUrnY3uZshSfDJUAge951OS7J9gwLZGfsBlWRSOYz/TRg==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.0.3
+      dotenv-expand: 8.0.3
+      minimist: 1.2.6
+    dev: true
+
+  /dotenv-expand/8.0.3:
+    resolution: {integrity: sha512-SErOMvge0ZUyWd5B0NXMQlDkN+8r+HhVUsxgOO7IoPDOdDRD2JjExpN6y3KnFR66jsJMwSn1pqIivhU5rcJiNg==}
+    engines: {node: '>=12'}
+    dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /eastasianwidth/0.2.0:
