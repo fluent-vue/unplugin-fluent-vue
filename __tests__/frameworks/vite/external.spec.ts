@@ -71,4 +71,35 @@ describe('Vite external', () => {
     expect(code).toContain('external.setup.vue.ftl')
     expect(code).toMatchSnapshot()
   })
+
+  it('virtual:ftl-for-file', async () => {
+    // Arrange
+    // Act
+    const code = await compile({
+      plugins: [
+        vue3(),
+        ExternalFluentPlugin({
+          baseDir: resolve(baseDir, 'fixtures'),
+          ftlDir: resolve(baseDir, 'fixtures/ftl'),
+          locales: ['en', 'da'],
+        }),
+      ],
+    }, '/fixtures/importer.js')
+
+    // Assert
+    expect(code).toMatchInlineSnapshot(`
+      "=== /fixtures/importer.js ===
+      import translations from '/@id/virtual:ftl-for-file?importer=/fixtures/importer.js'
+
+      // eslint-disable-next-line no-console -- this is a test file
+      console.log(translations)
+
+
+      === virtual:ftl-for-file?importer=/fixtures/importer.js ===
+      import en_ftl from '/fixtures/ftl/en/importer.js.ftl?import';
+      import da_ftl from '/fixtures/ftl/da/importer.js.ftl?import';
+      export default { 'en': en_ftl, 'da': da_ftl }
+      "
+    `)
+  })
 })

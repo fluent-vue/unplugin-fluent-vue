@@ -1,6 +1,7 @@
 interface ExternalPluginOptionsBase {
   locales: string[]
   checkSyntax?: boolean
+  virtualModuleName?: string
 }
 
 interface ExternalPluginOptionsFolder extends ExternalPluginOptionsBase {
