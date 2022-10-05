@@ -1,5 +1,14 @@
 
 
+
+## 1.1.1 (2022-10-05)
+
+#### :star: New Features
+* [#29](https://github.com/fluent-vue/unplugin-fluent-vue/pull/29) Add a virtual module that imports all translations for a file ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.1.0 (2022-10-02)
 
 #### :star: New Features
