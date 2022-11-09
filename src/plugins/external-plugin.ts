@@ -132,6 +132,9 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
 
         const translations = await getTranslationsForFile(id)
 
+        if (translations.length === 0)
+          return
+
         for (const { ftlPath } of translations)
           this.addWatchFile(ftlPath)
 
