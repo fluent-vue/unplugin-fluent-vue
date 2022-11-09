@@ -1,6 +1,15 @@
 
 
 
+
+## 1.1.2 (2022-11-09)
+
+#### :bug: Bug Fixes
+* [#31](https://github.com/fluent-vue/unplugin-fluent-vue/pull/31) Do not transform file if there are no translations ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.1.1 (2022-10-05)
 
 #### :star: New Features
