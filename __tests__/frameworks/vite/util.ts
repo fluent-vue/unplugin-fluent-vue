@@ -26,6 +26,17 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
           }
         },
       },
+      {
+        name: 'virtual:empty',
+        resolveId(id) {
+          if (id.startsWith('virtual:empty:'))
+            return id
+        },
+        load(id) {
+          if (id.startsWith('virtual:empty:'))
+            return 'export default {}'
+        },
+      },
     ],
   })
 
