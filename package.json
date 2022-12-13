@@ -65,7 +65,7 @@
     "@fluent/syntax": "^0.18.1",
     "@rollup/pluginutils": "^5.0.0",
     "magic-string": "^0.27.0",
-    "unplugin": "^0.10.0"
+    "unplugin": "^1.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "0.34.0",
