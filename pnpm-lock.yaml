@@ -6,7 +6,7 @@ specifiers:
   '@release-it-plugins/lerna-changelog': 5.0.0
   '@rollup/pluginutils': ^5.0.0
   '@types/node': 18.11.14
-  '@vitejs/plugin-vue': 3.2.0
+  '@vitejs/plugin-vue': 4.0.0
   '@vitest/coverage-c8': 0.25.8
   '@vue/compiler-sfc': 3.2.45
   dotenv-cli: 6.0.0
@@ -36,7 +36,7 @@ devDependencies:
   '@antfu/eslint-config-ts': 0.34.0_ha6vam6werchizxrnqvarmz2zu
   '@release-it-plugins/lerna-changelog': 5.0.0_release-it@15.5.1
   '@types/node': 18.11.14
-  '@vitejs/plugin-vue': 3.2.0_vite@4.0.1+vue@3.2.45
+  '@vitejs/plugin-vue': 4.0.0_vite@4.0.1+vue@3.2.45
   '@vitest/coverage-c8': 0.25.8
   '@vue/compiler-sfc': 3.2.45
   dotenv-cli: 6.0.0
@@ -893,11 +893,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/3.2.0_vite@4.0.1+vue@3.2.45:
-    resolution: {integrity: sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==}
+  /@vitejs/plugin-vue/4.0.0_vite@4.0.1+vue@3.2.45:
+    resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: ^3.0.0
+      vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
       vite: 4.0.1_@types+node@18.11.14
