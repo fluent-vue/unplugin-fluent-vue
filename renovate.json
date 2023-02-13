@@ -4,5 +4,5 @@
     "config:base",
     "group:allNonMajor"
   ],
-  "lockFileMaintenance": { "enabled": true },
+  "lockFileMaintenance": { "enabled": true }
 }
