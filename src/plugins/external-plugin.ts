@@ -1,5 +1,5 @@
-import { join, relative } from 'path'
-import { stat as fsStat } from 'fs/promises'
+import { join, relative } from 'node:path'
+import { stat as fsStat } from 'node:fs/promises'
 import { createUnplugin } from 'unplugin'
 
 import MagicString from 'magic-string'

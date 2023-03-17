@@ -1,4 +1,4 @@
-import { resolve, sep } from 'path'
+import { resolve, sep } from 'node:path'
 
 import type { InlineConfig, ModuleNode } from 'vite'
 import { createServer } from 'vite'
