@@ -143,10 +143,12 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
         magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
         for (const dep of translations)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
+
+        const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
+
         magic.appendLeft(insertPos, `
-const __HOT_API__ = import.meta.hot || import.meta.webpackHot
-if (__HOT_API__) {
-  __HOT_API__.accept([${translations.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
+if (${__HOT_API__}) {
+  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
     ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
 
     delete ${target}._fluent
