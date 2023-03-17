@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
 
 export function warn(...args: unknown[]) {
   console.warn('[unplugin-fluent-vue] ', ...args)
