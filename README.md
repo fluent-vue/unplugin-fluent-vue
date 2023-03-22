@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/fluent-vue/unplugin-fluent-vue/actions">
-    <img src="https://img.shields.io/github/workflow/status/fluent-vue/unplugin-fluent-vue/Test" alt="GitHub Workflow Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/fluent-vue/unplugin-fluent-vue/test.yml?branch=main" alt="GitHub Workflow Status">
   </a>
   <a href="https://codecov.io/gh/fluent-vue/unplugin-fluent-vue">
     <img src="https://codecov.io/gh/fluent-vue/unplugin-fluent-vue/branch/main/graph/badge.svg?token=0JSSE94EGJ" alt="codecov">
