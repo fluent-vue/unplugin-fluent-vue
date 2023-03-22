@@ -1,4 +1,4 @@
-import { join, relative } from 'node:path'
+import { dirname, join, relative } from 'node:path'
 import { stat as fsStat } from 'node:fs/promises'
 import { createUnplugin } from 'unplugin'
 
@@ -55,6 +55,7 @@ const isFtl = createFilter(['**/*.ftl'])
 interface Dependency {
   locale: string
   ftlPath: string
+  relativeFtlPath: string
   importVariable: string
 }
 
@@ -80,11 +81,13 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     for (const locale of options.locales) {
       const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
       const ftlExists = await fileExists(ftlPath)
+      const relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
 
       if (ftlExists) {
         dependencies.push({
           locale,
           ftlPath,
+          relativeFtlPath,
           importVariable: `${makeLegalIdentifier(locale)}_ftl`,
         })
       }
@@ -139,14 +142,16 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
           this.addWatchFile(ftlPath)
 
         for (const dep of translations)
-          magic.prepend(`import ${dep.importVariable} from '${dep.ftlPath}';\n`)
+          magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
         magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
         for (const dep of translations)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
+
+        const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
+
         magic.appendLeft(insertPos, `
-const __HOT_API__ = import.meta.hot || import.meta.webpackHot
-if (__HOT_API__) {
-  __HOT_API__.accept([${translations.map(dep => `'${dep.ftlPath}'`).join(', ')}], () => {
+if (${__HOT_API__}) {
+  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], () => {
     ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
 
     delete ${target}._fluent

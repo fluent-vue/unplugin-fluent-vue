@@ -55,6 +55,7 @@ export async function compile(options: InlineConfig, file: string): Promise<stri
   const code = modules
     .filter(module => module.transform)
     .filter(module => !module.module.url.includes('node_modules'))
+    .filter(module => !module.module.url.includes('virtual:empty:'))
     .map(module => `=== ${module.module.url} ===\n${module.transform.code}`).join('\n\n')
 
   // normalize paths
