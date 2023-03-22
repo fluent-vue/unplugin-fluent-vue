@@ -2,6 +2,15 @@
 
 
 
+
+## 1.1.3 (2023-03-22)
+
+#### :bug: Bug Fixes
+* [#43](https://github.com/fluent-vue/unplugin-fluent-vue/pull/43) Fix HMR code not being treeshaken ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.1.2 (2022-11-09)
 
 #### :bug: Bug Fixes
