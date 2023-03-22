@@ -81,7 +81,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     for (const locale of options.locales) {
       const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
       const ftlExists = await fileExists(ftlPath)
-      const relativeFtlPath = relative(dirname(id), ftlPath)
+      const relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
 
       if (ftlExists) {
         dependencies.push({
