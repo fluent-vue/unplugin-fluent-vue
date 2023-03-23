@@ -5,39 +5,18 @@ import { createUnplugin } from 'unplugin'
 import MagicString from 'magic-string'
 import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
 
-import type { ExternalPluginOptions, InsertInfo } from '../types'
+import type { ExternalPluginOptions } from '../types'
+import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getSyntaxErrors } from './ftl/parse'
 
-function getInsertInfo(source: string): InsertInfo {
-  let target = null
+const isVue = createFilter(['**/*.vue'])
+const isFtl = createFilter(['**/*.ftl'])
 
-  // vite-plugin-vue2
-  if (source.includes('__component__'))
-    target = '__component__'
-
-  // rollup-plugin-vue
-  if (source.includes('export default script'))
-    target = 'script'
-
-  // @vitejs/plugin-vue
-  if (source.includes('_sfc_main')) {
-    return {
-      target: '_sfc_main',
-      insertPos: source.indexOf('export default'),
-      usePos: source.indexOf('_export_sfc(_sfc_main, [') + 24,
-    }
-  }
-
-  // vue-loader
-  if (source.includes('__exports__'))
-    target = '__exports__'
-
-  const insertPos = source.indexOf('export default')
-
-  if (insertPos === -1 || target === null)
-    throw new Error('Could not parse vue component. This is the issue with unplugin-fluent-vue.\nPlease report this issue to the unplugin-fluent-vue repository.')
-
-  return { insertPos, target }
+interface Dependency {
+  locale: string
+  ftlPath: string
+  relativeFtlPath: string
+  importVariable: string
 }
 
 async function fileExists(filename: string): Promise<boolean> {
@@ -54,17 +33,7 @@ function normalizePath(path: string) {
   return path.replace(/\\/g, '/')
 }
 
-const isVue = createFilter(['**/*.vue'])
-const isFtl = createFilter(['**/*.ftl'])
-
-interface Dependency {
-  locale: string
-  ftlPath: string
-  relativeFtlPath: string
-  importVariable: string
-}
-
-export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) => {
+export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
   const resolvedOptions = {
     checkSyntax: true,
     virtualModuleName: 'virtual:ftl-for-file',
@@ -79,38 +48,6 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     resolvedOptions.getFtlPath = (locale: string, vuePath: string) => {
       return join(options.ftlDir, locale, `${relative(options.baseDir, vuePath)}.ftl`)
     }
-  }
-
-  const insertFtlImports = (magic: MagicString, translations: Dependency[]) => {
-    for (const dep of translations)
-      magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
-  }
-
-  const insertHotCode = (magic: MagicString, translations: Dependency[], target: string, insertPos: number) => {
-    const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
-
-    magic.appendLeft(insertPos, `
-if (${__HOT_API__}) {
-  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], (mods) => {
-    ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
-
-    if (mods) {
-      ${translations.map(({ locale }, index) => `if (mods['${index}']) ${target}.fluent['${locale}'] = mods['${index}'].default`).join('\n')}
-    }
-
-    delete ${target}._fluent
-    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
-      // Vue 3
-      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
-    } else {
-      // Vue 2
-      // There is no proper api to access HMR for component from custom block
-      // so use this magic
-      delete ${target}._Ctor
-    }
-  })
-}
-`)
   }
 
   const getTranslationsForFile = async (id: string) => {
@@ -135,12 +72,20 @@ if (${__HOT_API__}) {
     return dependencies
   }
 
+  const isFluentCustomBlock = (id: string) => {
+    const request = parseVueRequest(id)
+    return isCustomBlock(request.query, { blockType: 'fluent' })
+  }
+
   return {
     name: 'unplugin-fluent-vue-external',
-    enforce: meta.framework === 'webpack' ? 'post' : undefined,
+    enforce: 'pre',
     resolveId(id, importer) {
       if (id === resolvedOptions.virtualModuleName)
         return `${id}?importer=${importer}`
+    },
+    loadInclude(id: string) {
+      return id.startsWith(resolvedOptions.virtualModuleName)
     },
     async load(id) {
       if (!id.startsWith(resolvedOptions.virtualModuleName))
@@ -164,34 +109,19 @@ if (${__HOT_API__}) {
       return code
     },
     transformInclude(id: string) {
-      return isVue(id) || isFtl(id)
+      return isVue(id) || isFtl(id) || isFluentCustomBlock(id)
     },
     async transform(source: string, id: string) {
       if (isVue(id)) {
         const magic = new MagicString(source, { filename: id })
-
-        const { insertPos, target, usePos } = getInsertInfo(source)
 
         const translations = await getTranslationsForFile(id)
 
         if (translations.length === 0)
           return
 
-        for (const { ftlPath } of translations)
-          this.addWatchFile(ftlPath)
-
-        insertFtlImports(magic, translations)
-
-        if (usePos == null) {
-          magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
-          for (const dep of translations)
-            magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
-        }
-        else {
-          magic.appendRight(usePos, `['fluent',{${translations.map(dep => `'${dep.locale}':${dep.importVariable}`).join(',')}}],`)
-        }
-
-        insertHotCode(magic, translations, target, insertPos)
+        for (const { relativeFtlPath, locale } of translations)
+          magic.append(`<fluent locale="${locale}" src="${relativeFtlPath}"></fluent>\n`)
 
         return {
           code: magic.toString(),
@@ -210,6 +140,24 @@ if (${__HOT_API__}) {
 import { FluentResource } from '@fluent/bundle'
 export default /*#__PURE__*/ new FluentResource(${JSON.stringify(source)})
 `
+      }
+
+      const query = parseVueRequest(id).query
+      if (isFluentCustomBlock(id)) {
+        if (options.checkSyntax) {
+          const errorsText = getSyntaxErrors(source)
+          if (errorsText)
+            this.error(errorsText)
+        }
+
+        return `
+import { FluentResource } from '@fluent/bundle'
+
+export default function (Component) {
+  const target = Component.options || Component
+  target.fluent = target.fluent || {}
+  target.fluent['${query.locale}'] = new FluentResource(${JSON.stringify(source)})
+}`
       }
 
       return undefined
