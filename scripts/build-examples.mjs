@@ -14,7 +14,7 @@ async function buildExamples () {
 
   for (const example of examples) {
     console.log(`building ${example.folder}...`)
-    await execa('pnpm', ['add', `file:../../`], { stdio: 'inherit', cwd: example.folder })
+    await execa('pnpm', ['add', `link:../../`], { stdio: 'inherit', cwd: example.folder })
     await execa('pnpm', ['i'], { stdio: 'inherit', cwd: example.folder })
     await execa('pnpm', ['build'], { stdio: 'inherit', cwd: example.folder })
   }
