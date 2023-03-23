@@ -22,5 +22,6 @@ export interface SFCPluginOptions {
 
 export interface InsertInfo {
   insertPos: number
+  usePos?: number
   target: string
 }

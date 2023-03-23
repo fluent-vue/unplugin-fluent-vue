@@ -20,8 +20,13 @@ function getInsertInfo(source: string): InsertInfo {
     target = 'script'
 
   // @vitejs/plugin-vue
-  if (source.includes('_sfc_main'))
-    target = '_sfc_main'
+  if (source.includes('_sfc_main')) {
+    return {
+      target: '_sfc_main',
+      insertPos: source.indexOf('export default'),
+      usePos: source.indexOf('_export_sfc(_sfc_main, [') + 24,
+    }
+  }
 
   // vue-loader
   if (source.includes('__exports__'))
@@ -165,7 +170,7 @@ if (${__HOT_API__}) {
       if (isVue(id)) {
         const magic = new MagicString(source, { filename: id })
 
-        const { insertPos, target } = getInsertInfo(source)
+        const { insertPos, target, usePos } = getInsertInfo(source)
 
         const translations = await getTranslationsForFile(id)
 
@@ -177,9 +182,14 @@ if (${__HOT_API__}) {
 
         insertFtlImports(magic, translations)
 
-        magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
-        for (const dep of translations)
-          magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
+        if (usePos == null) {
+          magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
+          for (const dep of translations)
+            magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
+        }
+        else {
+          magic.appendRight(usePos, `['fluent',{${translations.map(dep => `'${dep.locale}':${dep.importVariable}`).join(',')}}],`)
+        }
 
         insertHotCode(magic, translations, target, insertPos)
 
