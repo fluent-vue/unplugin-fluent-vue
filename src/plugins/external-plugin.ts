@@ -208,7 +208,7 @@ if (${__HOT_API__}) {
 
         return `
 import { FluentResource } from '@fluent/bundle'
-export default new FluentResource(${JSON.stringify(source)})
+export default /*#__PURE__*/ new FluentResource(${JSON.stringify(source)})
 `
       }
 
