@@ -76,6 +76,29 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     }
   }
 
+  const insertHotCode = (magic: MagicString, translations: Dependency[], target: string, insertPos: number) => {
+    const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
+
+    magic.appendLeft(insertPos, `
+if (${__HOT_API__}) {
+  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], () => {
+    ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
+
+    delete ${target}._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete ${target}._Ctor
+    }
+  })
+}
+`)
+  }
+
   const getTranslationsForFile = async (id: string) => {
     const dependencies: Dependency[] = []
     for (const locale of options.locales) {
@@ -147,26 +170,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
         for (const dep of translations)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
 
-        const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
-
-        magic.appendLeft(insertPos, `
-if (${__HOT_API__}) {
-  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], () => {
-    ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
-
-    delete ${target}._fluent
-    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
-      // Vue 3
-      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
-    } else {
-      // Vue 2
-      // There is no proper api to access HMR for component from custom block
-      // so use this magic
-      delete ${target}._Ctor
-    }
-  })
-}
-`)
+        insertHotCode(magic, translations, target, insertPos)
 
         return {
           code: magic.toString(),
