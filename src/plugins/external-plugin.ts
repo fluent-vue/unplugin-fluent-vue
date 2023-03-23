@@ -76,12 +76,46 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     }
   }
 
+  const insertFtlImports = (magic: MagicString, translations: Dependency[]) => {
+    for (const dep of translations)
+      magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
+  }
+
+  const insertHotCode = (magic: MagicString, translations: Dependency[], target: string, insertPos: number) => {
+    const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
+
+    magic.appendLeft(insertPos, `
+if (${__HOT_API__}) {
+  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], (mods) => {
+    ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
+
+    if (mods) {
+      ${translations.map(({ locale }, index) => `if (mods['${index}']) ${target}.fluent['${locale}'] = mods['${index}'].default`).join('\n')}
+    }
+
+    delete ${target}._fluent
+    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
+      // Vue 3
+      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
+    } else {
+      // Vue 2
+      // There is no proper api to access HMR for component from custom block
+      // so use this magic
+      delete ${target}._Ctor
+    }
+  })
+}
+`)
+  }
+
   const getTranslationsForFile = async (id: string) => {
     const dependencies: Dependency[] = []
     for (const locale of options.locales) {
       const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
       const ftlExists = await fileExists(ftlPath)
-      const relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
+      let relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
+      if (!relativeFtlPath.startsWith('.'))
+        relativeFtlPath = `./${relativeFtlPath}`
 
       if (ftlExists) {
         dependencies.push({
@@ -141,32 +175,13 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
         for (const { ftlPath } of translations)
           this.addWatchFile(ftlPath)
 
-        for (const dep of translations)
-          magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
+        insertFtlImports(magic, translations)
+
         magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
         for (const dep of translations)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
 
-        const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
-
-        magic.appendLeft(insertPos, `
-if (${__HOT_API__}) {
-  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], () => {
-    ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
-
-    delete ${target}._fluent
-    if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
-      // Vue 3
-      __VUE_HMR_RUNTIME__.reload(${target}.__hmrId, ${target})
-    } else {
-      // Vue 2
-      // There is no proper api to access HMR for component from custom block
-      // so use this magic
-      delete ${target}._Ctor
-    }
-  })
-}
-`)
+        insertHotCode(magic, translations, target, insertPos)
 
         return {
           code: magic.toString(),
