@@ -109,7 +109,9 @@ if (${__HOT_API__}) {
     for (const locale of options.locales) {
       const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
       const ftlExists = await fileExists(ftlPath)
-      const relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
+      let relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
+      if (!relativeFtlPath.startsWith('.'))
+        relativeFtlPath = `./${relativeFtlPath}`
 
       if (ftlExists) {
         dependencies.push({
