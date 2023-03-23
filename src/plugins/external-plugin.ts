@@ -76,6 +76,11 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
     }
   }
 
+  const insertFtlImports = (magic: MagicString, translations: Dependency[]) => {
+    for (const dep of translations)
+      magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
+  }
+
   const insertHotCode = (magic: MagicString, translations: Dependency[], target: string, insertPos: number) => {
     const __HOT_API__ = meta.framework === 'webpack' ? 'import.meta.webpackHot' : 'import.meta.hot'
 
@@ -164,8 +169,8 @@ if (${__HOT_API__}) {
         for (const { ftlPath } of translations)
           this.addWatchFile(ftlPath)
 
-        for (const dep of translations)
-          magic.prepend(`import ${dep.importVariable} from '${dep.relativeFtlPath}';\n`)
+        insertFtlImports(magic, translations)
+
         magic.appendLeft(insertPos, `${target}.fluent = ${target}.fluent || {};\n`)
         for (const dep of translations)
           magic.appendLeft(insertPos, `${target}.fluent['${dep.locale}'] = ${dep.importVariable}\n`)
