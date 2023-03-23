@@ -86,8 +86,12 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions, meta) =>
 
     magic.appendLeft(insertPos, `
 if (${__HOT_API__}) {
-  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], () => {
+  ${__HOT_API__}.accept([${translations.map(dep => `'${dep.relativeFtlPath}'`).join(', ')}], (mods) => {
     ${translations.map(({ locale, importVariable }) => `${target}.fluent['${locale}'] = ${importVariable}`).join('\n')}
+
+    if (mods) {
+      ${translations.map(({ locale }, index) => `if (mods['${index}']) ${target}.fluent['${locale}'] = mods['${index}'].default`).join('\n')}
+    }
 
     delete ${target}._fluent
     if (typeof __VUE_HMR_RUNTIME__ !== 'undefined') {
