@@ -81,7 +81,7 @@
     "lint-staged": "13.2.0",
     "memfs": "3.4.13",
     "release-it": "15.9.1",
-    "tsup": "6.7.0",
+    "tsup": "7.2.0",
     "typescript": "5.0.2",
     "vite": "4.2.1",
     "vitest": "0.29.7",
