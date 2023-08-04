@@ -1,15 +1,11 @@
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-import vue3base from '@vitejs/plugin-vue'
+import vue3 from '@vitejs/plugin-vue'
 import compiler from '@vue/compiler-sfc'
 
 import { ExternalFluentPlugin, SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
-
-const vue3 = () => vue3base({
-  compiler,
-})
 
 const baseDir = resolve(__dirname, '../..')
 
@@ -19,7 +15,9 @@ describe('Error checking', () => {
     // Act
     const code = compile({
       plugins: [
-        vue3(),
+        vue3({
+          compiler,
+        }),
         ExternalFluentPlugin({
           baseDir: resolve(baseDir, 'fixtures'),
           ftlDir: resolve(baseDir, 'fixtures/ftl'),
@@ -36,7 +34,7 @@ describe('Error checking', () => {
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
-      3 |  
+      3 |
       4 |  # Complex things are possible.
           E0010: Expected one of the variants to be marked as default (*) (9:3)
       7  |      [one] added one photo
@@ -53,7 +51,9 @@ describe('Error checking', () => {
     // Act
     const code = compile({
       plugins: [
-        vue3(),
+        vue3({
+          compiler,
+        }),
         SFCFluentPlugin({
           checkSyntax: true,
         }),
@@ -67,7 +67,7 @@ describe('Error checking', () => {
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
-      3 |  
+      3 |
       4 |  # Complex things are possible.
           E0010: Expected one of the variants to be marked as default (*) (9:3)
       7  |      [one] added one photo
