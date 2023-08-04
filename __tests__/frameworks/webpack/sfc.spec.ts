@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import type { Stats } from 'webpack'
+import type { Stats } from 'webpack/types'
 
 import { compile } from './util'
 

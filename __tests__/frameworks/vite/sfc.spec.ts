@@ -1,14 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import vue3base from '@vitejs/plugin-vue'
+import vue3 from '@vitejs/plugin-vue'
 
 import compiler from '@vue/compiler-sfc'
 import { SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
-
-const vue3 = () => vue3base({
-  compiler,
-})
 
 describe('Vite SFC', () => {
   it('generates custom block code', async () => {
@@ -16,7 +12,9 @@ describe('Vite SFC', () => {
     // Act
     const code = await compile({
       plugins: [
-        vue3(),
+        vue3({
+          compiler,
+        }),
         SFCFluentPlugin(),
       ],
     }, '/fixtures/test.vue')
@@ -30,7 +28,9 @@ describe('Vite SFC', () => {
     // Act
     const code = await compile({
       plugins: [
-        vue3(),
+        vue3({
+          compiler,
+        }),
         SFCFluentPlugin({
           blockType: 'i18n',
         }),
