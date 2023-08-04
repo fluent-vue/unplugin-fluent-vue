@@ -1,5 +1,3 @@
-import type { SFCPluginOptions } from './types'
-
 export interface VueQuery {
   vue?: boolean
   type?: 'script' | 'template' | 'style' | 'custom' | 'fluent'
@@ -33,7 +31,7 @@ export function parseVueRequest(id: string) {
   }
 }
 
-export function isCustomBlock(query: VueQuery, options: SFCPluginOptions): boolean {
+export function isCustomBlock(query: VueQuery, options: { blockType: string }): boolean {
   return (
     'vue' in query
     && (query.type === 'custom' // for vite (@vite-plugin-vue)
