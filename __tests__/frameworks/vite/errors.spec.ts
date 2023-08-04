@@ -34,7 +34,7 @@ describe('Error checking', () => {
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
-      3 |
+      3 |  
       4 |  # Complex things are possible.
           E0010: Expected one of the variants to be marked as default (*) (9:3)
       7  |      [one] added one photo
@@ -67,7 +67,7 @@ describe('Error checking', () => {
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
-      3 |
+      3 |  
       4 |  # Complex things are possible.
           E0010: Expected one of the variants to be marked as default (*) (9:3)
       7  |      [one] added one photo

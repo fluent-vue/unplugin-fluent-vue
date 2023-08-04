@@ -93,15 +93,15 @@ describe('Vite external', () => {
     // Assert
     expect(code).toMatchInlineSnapshot(`
       "=== /fixtures/importer.js ===
-      import translations from '/@id/virtual:ftl-for-file?importer=/fixtures/importer.js'
+      import translations from \\"/@id/virtual:ftl-for-file?importer=/fixtures/importer.js\\"
 
       // eslint-disable-next-line no-console -- this is a test file
       console.log(translations)
 
 
       === virtual:ftl-for-file?importer=/fixtures/importer.js ===
-      import en_ftl from '/fixtures/ftl/en/importer.js.ftl?import';
-      import da_ftl from '/fixtures/ftl/da/importer.js.ftl?import';
+      import en_ftl from \\"/fixtures/ftl/en/importer.js.ftl?import\\";
+      import da_ftl from \\"/fixtures/ftl/da/importer.js.ftl?import\\";
       export default { 'en': en_ftl, 'da': da_ftl }
       "
     `)
