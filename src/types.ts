@@ -19,8 +19,3 @@ export interface SFCPluginOptions {
   blockType?: string
   checkSyntax?: boolean
 }
-
-export interface InsertInfo {
-  insertPos: number
-  target: string
-}
