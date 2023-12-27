@@ -69,4 +69,4 @@ jobs:
           version: 8.x.x
 
       - name: Test
-        run: node scripts/build-examples.mjs
+        run: node scripts/build-examples.js

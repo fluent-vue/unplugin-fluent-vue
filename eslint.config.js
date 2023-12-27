@@ -1,6 +1,6 @@
-const config = require('@antfu/eslint-config')
+import config from '@antfu/eslint-config'
 
-module.exports = config.default({}, {
+export default config({}, {
   rules: {
     'test/prefer-lowercase-title': 'off',
   },
