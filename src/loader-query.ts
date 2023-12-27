@@ -35,7 +35,7 @@ export function isCustomBlock(query: VueQuery, options: { blockType: string }): 
   return (
     'vue' in query
     && (query.type === 'custom' // for vite (@vite-plugin-vue)
-      || query.type === options.blockType // for webpack (vue-loader)
-      || query.blockType === options.blockType) // for webpack (vue-loader)
+    || query.type === options.blockType // for webpack (vue-loader)
+    || query.blockType === options.blockType) // for webpack (vue-loader)
   )
 }

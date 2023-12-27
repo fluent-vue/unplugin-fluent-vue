@@ -44,6 +44,7 @@ describe('Webpack SFC', () => {
     await expect(func).rejects.toContainEqual(
       expect.objectContaining({
         details: expect.stringContaining('Error: Custom block does not have locale attribute'),
-      }))
+      }),
+    )
   })
 })
