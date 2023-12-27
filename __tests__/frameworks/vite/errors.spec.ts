@@ -29,8 +29,8 @@ describe('Error checking', () => {
 
     // Assert
     await expect(code).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "Fluent parse errors:
-          E0003: Expected token: \\"}\\" (2:31)
+      [Error: Fluent parse errors:
+          E0003: Expected token: "}" (2:31)
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
@@ -42,7 +42,7 @@ describe('Error checking', () => {
       9  |    }to {$userGender ->
          |    ^
       10 |      [male] his stream
-      11 |      [female] her stream"
+      11 |      [female] her stream]
     `)
   })
 
@@ -62,8 +62,8 @@ describe('Error checking', () => {
 
     // Assert
     await expect(code).rejects.toThrowErrorMatchingInlineSnapshot(`
-      "Fluent parse errors:
-          E0003: Expected token: \\"}\\" (2:31)
+      [Error: Fluent parse errors:
+          E0003: Expected token: "}" (2:31)
       1 |  # Simple things are simple.
       2 |  hello-user = Hello, {$userName!
         |                                ^
@@ -75,7 +75,7 @@ describe('Error checking', () => {
       9  |    }to {$userGender ->
          |    ^
       10 |      [male] his stream
-      11 |      [female] her stream"
+      11 |      [female] her stream]
     `)
   })
 })
