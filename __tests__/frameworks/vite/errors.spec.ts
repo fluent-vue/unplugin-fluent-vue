@@ -9,7 +9,7 @@ import { compile } from './util'
 
 const baseDir = resolve(__dirname, '../..')
 
-describe('Error checking', () => {
+describe('error checking', () => {
   it('checks for syntax errors in external ftl files', async () => {
     // Arrange
     // Act

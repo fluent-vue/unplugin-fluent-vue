@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ESNext",
+    "baseUrl": ".",
     "moduleResolution": "node",
+    "types": ["node"],
     "sourceMap": true,
-    "esModuleInterop": true,
-    "types": ["node"]
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"

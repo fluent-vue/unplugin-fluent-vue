@@ -50,8 +50,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "*.d.ts"
+    "*.d.ts",
+    "dist"
   ],
   "scripts": {
     "test": "vitest",
@@ -68,7 +68,7 @@
     "unplugin": "^1.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "0.40.0",
+    "@antfu/eslint-config": "^2.6.1",
     "@release-it-plugins/lerna-changelog": "6.0.0",
     "@types/node": "20.10.5",
     "@vitejs/plugin-vue": "5.0.0",
@@ -92,11 +92,6 @@
   "lint-staged": {
     "*.js": "eslint --fix",
     "*.ts?(x)": "eslint --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@antfu/eslint-config-ts"
-    ]
   },
   "changelog": {
     "labels": {
