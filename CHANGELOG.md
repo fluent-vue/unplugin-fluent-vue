@@ -3,6 +3,15 @@
 
 
 
+
+## 1.2.0 (2024-03-05)
+
+#### :star: New Features
+* [#55](https://github.com/fluent-vue/unplugin-fluent-vue/pull/55) Mark ftl imports side-effect free ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.1.4 (2023-03-23)
 
 ## 1.1.3 (2023-03-22)
