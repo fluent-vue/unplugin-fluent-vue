@@ -80,7 +80,7 @@
     "test:coverage": "vitest  --coverage",
     "build": "tsup",
     "lint": "eslint .",
-    "prepare": "husky install",
+    "prepare": "husky",
     "release": "dotenv release-it"
   },
   "dependencies": {
