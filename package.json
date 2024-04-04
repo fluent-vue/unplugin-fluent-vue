@@ -90,7 +90,7 @@
     "unplugin": "^1.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.0",
+    "@antfu/eslint-config": "^2.12.1",
     "@release-it-plugins/lerna-changelog": "6.1.0",
     "@types/node": "20.11.24",
     "@vitejs/plugin-vue": "5.0.4",
