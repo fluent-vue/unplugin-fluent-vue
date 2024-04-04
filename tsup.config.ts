@@ -6,6 +6,7 @@ export default defineConfig({
     './src/webpack.ts',
     './src/vite.ts',
     './src/rollup.ts',
+    './src/nuxt.ts',
   ],
   format: ['esm', 'cjs'],
   outDir: 'dist/',

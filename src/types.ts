@@ -4,12 +4,12 @@ interface ExternalPluginOptionsBase {
   virtualModuleName?: string
 }
 
-interface ExternalPluginOptionsFolder extends ExternalPluginOptionsBase {
+export interface ExternalPluginOptionsFolder extends ExternalPluginOptionsBase {
   baseDir: string
   ftlDir: string
 }
 
-interface ExternalPluginOptionsFunction extends ExternalPluginOptionsBase {
+export interface ExternalPluginOptionsFunction extends ExternalPluginOptionsBase {
   getFtlPath: (locale: string, vuePath: string) => string
 }
 
