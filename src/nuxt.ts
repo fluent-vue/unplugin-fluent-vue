@@ -15,6 +15,7 @@ interface NuxtFluentOptions {
 export default defineNuxtModule<NuxtFluentOptions>({
   meta: {
     name: 'fluent-vue',
+    configKey: 'fluentVue',
   },
   setup(options, nuxt) {
     if (!options.sfc && !options.external) {
@@ -37,3 +38,12 @@ export default defineNuxtModule<NuxtFluentOptions>({
     }
   },
 })
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    fluentVue?: NuxtFluentOptions
+  }
+  interface NuxtOptions {
+    fluentVue?: NuxtFluentOptions
+  }
+}
