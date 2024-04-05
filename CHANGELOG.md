@@ -4,6 +4,15 @@
 
 
 
+
+## 1.3.0 (2024-04-05)
+
+#### :star: New Features
+* [#84](https://github.com/fluent-vue/unplugin-fluent-vue/pull/84) Add Nuxt module ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.2.0 (2024-03-05)
 
 #### :star: New Features
