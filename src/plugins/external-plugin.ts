@@ -125,7 +125,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
 
         return {
           code: magic.toString(),
-          map: magic.generateMap({ hires: true }),
+          map: { mappings: '' },
         }
       }
 
@@ -136,10 +136,21 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
             this.error(errorsText)
         }
 
-        return `
+        const magic = new MagicString(source, { filename: id })
+
+        if (source.length > 0)
+          magic.update(0, source.length, JSON.stringify(source))
+        else
+          magic.append('""')
+        magic.prepend(`
 import { FluentResource } from '@fluent/bundle'
-export default /*#__PURE__*/ new FluentResource(${JSON.stringify(source)})
-`
+export default /*#__PURE__*/ new FluentResource(`)
+        magic.append(')\n')
+
+        return {
+          code: magic.toString(),
+          map: magic.generateMap(),
+        }
       }
 
       const query = parseVueRequest(id).query
@@ -150,14 +161,24 @@ export default /*#__PURE__*/ new FluentResource(${JSON.stringify(source)})
             this.error(errorsText)
         }
 
-        return `
+        const magic = new MagicString(source, { filename: id })
+        if (source.length > 0)
+          magic.update(0, source.length, JSON.stringify(source))
+        else
+          magic.append('""')
+        magic.prepend(`
 import { FluentResource } from '@fluent/bundle'
 
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(${JSON.stringify(source)})
-}`
+  target.fluent['${query.locale}'] = new FluentResource(`)
+        magic.append(')\n}')
+
+        return {
+          code: magic.toString(),
+          map: magic.generateMap(),
+        }
       }
 
       return undefined
