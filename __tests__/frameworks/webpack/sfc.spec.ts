@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest'
 
-import type { Stats } from 'webpack/types'
-
 import { compile } from './util'
 
 describe('Webpack SFC', () => {
@@ -37,11 +35,9 @@ describe('Webpack SFC', () => {
 
   it('errors with no locale attr', async () => {
     // Arrange
-    const func = async (): Promise<Stats> => await compile('fixtures/noLocale.vue')
-
     // Act
     // Assert
-    await expect(func).rejects.toContainEqual(
+    await expect(() => compile('fixtures/noLocale.vue')).rejects.toContainEqual(
       expect.objectContaining({
         details: expect.stringContaining('Error: Custom block does not have locale attribute'),
       }),

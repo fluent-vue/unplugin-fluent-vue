@@ -33,6 +33,11 @@ function normalizePath(path: string) {
   return path.replace(/\\/g, '/')
 }
 
+function isFluentCustomBlock(id: string) {
+  const request = parseVueRequest(id)
+  return isCustomBlock(request.query, { blockType: 'fluent' })
+}
+
 export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
   const resolvedOptions = {
     checkSyntax: true,
@@ -70,11 +75,6 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
     }
 
     return dependencies
-  }
-
-  const isFluentCustomBlock = (id: string) => {
-    const request = parseVueRequest(id)
-    return isCustomBlock(request.query, { blockType: 'fluent' })
   }
 
   return {
