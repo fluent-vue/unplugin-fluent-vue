@@ -102,7 +102,7 @@
     "unplugin": "^1.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.22.0",
+    "@antfu/eslint-config": "^2.27.3",
     "@nuxt/schema": "^3.11.2",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@types/node": "20.12.4",
