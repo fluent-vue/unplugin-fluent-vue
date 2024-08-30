@@ -111,7 +111,7 @@
     "@vue/compiler-sfc": "3.4.21",
     "dotenv-cli": "7.4.1",
     "eslint": "8.57.0",
-    "execa": "8.0.1",
+    "execa": "9.3.1",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "memfs": "4.8.1",
