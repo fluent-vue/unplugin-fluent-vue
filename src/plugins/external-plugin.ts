@@ -1,11 +1,11 @@
-import { dirname, join, relative } from 'node:path'
-import { stat as fsStat } from 'node:fs/promises'
-import { createUnplugin } from 'unplugin'
-
-import MagicString from 'magic-string'
-import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
-
 import type { ExternalPluginOptions } from '../types'
+import { stat as fsStat } from 'node:fs/promises'
+import { dirname, join, relative } from 'node:path'
+
+import { createFilter, makeLegalIdentifier } from '@rollup/pluginutils'
+import MagicString from 'magic-string'
+
+import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getSyntaxErrors } from './ftl/parse'
 

@@ -9,9 +9,7 @@ describe('Webpack SFC', () => {
     const stats = await compile('fixtures/test.vue')
 
     // Assert
-    const ftlModules = stats.toJson({ source: true }).modules
-      ?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc'))
-      .map(module => module.source)
+    const ftlModules = stats.toJson({ source: true }).modules?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc')).map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
     expect(ftlModules).toHaveLength(1)
@@ -24,9 +22,7 @@ describe('Webpack SFC', () => {
     const stats = await compile('fixtures/test.vue', {}, true)
 
     // Assert
-    const ftlModules = stats.toJson({ source: true }).modules
-      ?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc'))
-      .map(module => module.source)
+    const ftlModules = stats.toJson({ source: true }).modules?.filter(module => module.name?.includes('blockType=fluent') === true && !module.source.includes('unplugin-fluent-vue-sfc')).map(module => module.source)
 
     expect(ftlModules).not.toBeUndefined()
     expect(ftlModules).toHaveLength(1)

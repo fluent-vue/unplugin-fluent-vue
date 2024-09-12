@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest'
-
 import vue3 from '@vitejs/plugin-vue'
 
 import compiler from '@vue/compiler-sfc'
+
+import { describe, expect, it } from 'vitest'
 import { SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'
 

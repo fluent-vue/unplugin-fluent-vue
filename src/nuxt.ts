@@ -1,7 +1,7 @@
-import { addVitePlugin, defineNuxtModule } from '@nuxt/kit'
-import { ExternalFluentPlugin, SFCFluentPlugin, type SFCPluginOptions } from './vite'
 import type { ExternalPluginOptionsFolder, ExternalPluginOptionsFunction } from './types'
+import { addVitePlugin, defineNuxtModule } from '@nuxt/kit'
 import { directiveTransform } from './directive-transform'
+import { ExternalFluentPlugin, SFCFluentPlugin, type SFCPluginOptions } from './vite'
 
 interface NuxtFluentOptions {
   sfc?: SFCPluginOptions
