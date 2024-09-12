@@ -11,9 +11,6 @@ importers:
       '@fluent/syntax':
         specifier: ^0.19.0
         version: 0.19.0
-      '@nuxt/kit':
-        specifier: ^3.11.2
-        version: 3.11.2(rollup@4.21.3)(webpack-sources@3.2.3)
       '@rollup/pluginutils':
         specifier: ^5.0.0
         version: 5.1.0(rollup@4.21.3)
@@ -30,6 +27,9 @@ importers:
       '@antfu/eslint-config':
         specifier: ^3.6.0
         version: 3.6.0(@typescript-eslint/utils@8.5.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.38)(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4)(vitest@2.1.0(@types/node@20.16.2)(terser@5.32.0))
+      '@nuxt/kit':
+        specifier: ^3.11.2
+        version: 3.11.2(rollup@4.21.3)(webpack-sources@3.2.3)
       '@nuxt/schema':
         specifier: ^3.13.0
         version: 3.13.1(rollup@4.21.3)(webpack-sources@3.2.3)

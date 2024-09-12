@@ -94,9 +94,16 @@
     "prepare": "husky",
     "release": "dotenv release-it"
   },
+  "peerDependencies": {
+    "@nuxt/kit": "^3"
+  },
+  "peerDependenciesMeta": {
+    "@nuxt/kit": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@fluent/syntax": "^0.19.0",
-    "@nuxt/kit": "^3.11.2",
     "@rollup/pluginutils": "^5.0.0",
     "@vue/compiler-core": "^3.4.21",
     "magic-string": "^0.30.0",
@@ -104,6 +111,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.6.0",
+    "@nuxt/kit": "^3.11.2",
     "@nuxt/schema": "^3.13.0",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@types/node": "20.16.2",
