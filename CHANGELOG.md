@@ -5,6 +5,15 @@
 
 
 
+
+## 1.3.1 (2024-09-12)
+
+#### :bug: Bug Fixes
+* [#97](https://github.com/fluent-vue/unplugin-fluent-vue/pull/97) Make @nuxt/kit dependency optional ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.3.0 (2024-04-05)
 
 #### :star: New Features
