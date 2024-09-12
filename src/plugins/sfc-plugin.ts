@@ -1,7 +1,7 @@
 import type { VitePlugin } from 'unplugin'
-import { createUnplugin } from 'unplugin'
-
 import type { SFCPluginOptions } from '../types'
+
+import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getSyntaxErrors } from './ftl/parse'
 

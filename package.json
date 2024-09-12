@@ -94,16 +94,24 @@
     "prepare": "husky",
     "release": "dotenv release-it"
   },
+  "peerDependencies": {
+    "@nuxt/kit": "^3"
+  },
+  "peerDependenciesMeta": {
+    "@nuxt/kit": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@fluent/syntax": "^0.19.0",
-    "@nuxt/kit": "^3.11.2",
     "@rollup/pluginutils": "^5.0.0",
     "@vue/compiler-core": "^3.4.21",
     "magic-string": "^0.30.0",
     "unplugin": "^1.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.0.0",
+    "@antfu/eslint-config": "^3.6.0",
+    "@nuxt/kit": "^3.11.2",
     "@nuxt/schema": "^3.13.0",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@types/node": "20.16.2",
@@ -111,7 +119,7 @@
     "@vitest/coverage-istanbul": "^2.0.5",
     "@vue/compiler-sfc": "3.4.38",
     "dotenv-cli": "7.4.2",
-    "eslint": "9.9.1",
+    "eslint": "9.10.0",
     "execa": "9.3.1",
     "husky": "9.1.5",
     "lint-staged": "15.2.9",
@@ -120,7 +128,7 @@
     "tsup": "8.2.4",
     "typescript": "5.5.4",
     "vite": "5.4.2",
-    "vitest": "2.0.5",
+    "vitest": "2.1.0",
     "vue": "3.4.38",
     "vue-loader": "17.4.2",
     "webpack": "5.94.0"

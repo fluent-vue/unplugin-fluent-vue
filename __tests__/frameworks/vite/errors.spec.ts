@@ -1,8 +1,8 @@
 import { resolve } from 'node:path'
-import { describe, expect, it } from 'vitest'
-
 import vue3 from '@vitejs/plugin-vue'
+
 import compiler from '@vue/compiler-sfc'
+import { describe, expect, it } from 'vitest'
 
 import { ExternalFluentPlugin, SFCFluentPlugin } from '../../../src/vite'
 import { compile } from './util'

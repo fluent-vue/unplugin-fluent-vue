@@ -1,4 +1,4 @@
-export { rollupPlugin as SFCFluentPlugin } from './plugins/sfc-plugin'
 export { rollupPlugin as ExternalFluentPlugin } from './plugins/external-plugin'
+export { rollupPlugin as SFCFluentPlugin } from './plugins/sfc-plugin'
 
-export type { SFCPluginOptions, ExternalPluginOptions } from './types'
+export type { ExternalPluginOptions, SFCPluginOptions } from './types'

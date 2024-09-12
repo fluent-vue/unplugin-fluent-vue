@@ -31,11 +31,11 @@ npm install unplugin-fluent-vue --save-dev
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite'
 import {
   ExternalFluentPlugin,
   SFCFluentPlugin,
 } from 'unplugin-fluent-vue/vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
