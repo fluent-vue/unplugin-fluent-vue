@@ -58,6 +58,6 @@ export default function (Component) {
   }
 })
 
-export const vitePlugin: (options?: SFCPluginOptions) => VitePlugin = unplugin.vite
+export const vitePlugin = unplugin.vite as (options?: SFCPluginOptions) => VitePlugin
 export const rollupPlugin = unplugin.rollup
 export const webpackPlugin = unplugin.webpack

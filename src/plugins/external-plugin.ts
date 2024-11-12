@@ -46,11 +46,12 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
     ...options,
   }
 
+  let getFtlPath
   if ('getFtlPath' in options) {
-    resolvedOptions.getFtlPath = options.getFtlPath
+    getFtlPath = options.getFtlPath
   }
   else {
-    resolvedOptions.getFtlPath = (locale: string, vuePath: string) => {
+    getFtlPath = (locale: string, vuePath: string) => {
       return join(options.ftlDir, locale, `${relative(options.baseDir, vuePath)}.ftl`)
     }
   }
@@ -58,7 +59,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
   const getTranslationsForFile = async (id: string) => {
     const dependencies: Dependency[] = []
     for (const locale of options.locales) {
-      const ftlPath = normalizePath(resolvedOptions.getFtlPath(locale, id))
+      const ftlPath = normalizePath(getFtlPath(locale, id))
       const ftlExists = await fileExists(ftlPath)
       let relativeFtlPath = normalizePath(relative(dirname(id), ftlPath))
       if (!relativeFtlPath.startsWith('.'))

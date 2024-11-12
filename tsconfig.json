@@ -4,8 +4,10 @@
     "baseUrl": ".",
     "moduleResolution": "node",
     "types": ["node"],
+    "strict": true,
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules"
