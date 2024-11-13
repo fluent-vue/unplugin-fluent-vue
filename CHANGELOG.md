@@ -6,6 +6,15 @@
 
 
 
+
+## 1.3.2 (2024-11-13)
+
+#### :bug: Bug Fixes
+* [#103](https://github.com/fluent-vue/unplugin-fluent-vue/pull/103) Add sourcemap support to SFCFluentPlugin  ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.3.1 (2024-09-12)
 
 #### :bug: Bug Fixes
