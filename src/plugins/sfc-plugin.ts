@@ -1,6 +1,7 @@
 import type { VitePlugin } from 'unplugin'
 import type { SFCPluginOptions } from '../types'
 
+import MagicString from 'magic-string'
 import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getSyntaxErrors } from './ftl/parse'
@@ -23,11 +24,11 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
       const { query } = parseVueRequest(id)
 
       if (isCustomBlock(query, resolvedOptions)) {
-        const data = source
-          // vue-loader pads SFC file sections with newlines - trim those
-          .replace(/^(\n|\r\n)+|(\n|\r\n)+$/g, '')
-          // normalise newlines
-          .replace(/\r\n/g, '\n')
+        const originalSource = source
+
+        const magic = new MagicString(source, { filename: id })
+
+        source = source.replace(/\r\n/g, '\n').trim()
 
         if (query.locale == null)
           this.error('Custom block does not have locale attribute')
@@ -37,20 +38,29 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
           return source
 
         if (resolvedOptions.checkSyntax) {
-          const errorsText = getSyntaxErrors(data)
+          const errorsText = getSyntaxErrors(source)
           if (errorsText)
             this.error(errorsText)
         }
 
-        return `
+        if (originalSource.length > 0)
+          magic.update(0, originalSource.length, JSON.stringify(source))
+        else
+          magic.append('""')
+
+        magic.prepend(`
 import { FluentResource } from '@fluent/bundle'
 
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(${JSON.stringify(data)})
-}
-`
+  target.fluent['${query.locale}'] = new FluentResource(`)
+        magic.append(')\n}\n')
+
+        return {
+          code: magic.toString(),
+          map: magic.generateMap(),
+        }
       }
 
       return undefined
