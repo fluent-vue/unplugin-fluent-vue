@@ -126,7 +126,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
 
         return {
           code: magic.toString(),
-          map: { mappings: '' },
+          map: magic.generateMap(),
         }
       }
 
