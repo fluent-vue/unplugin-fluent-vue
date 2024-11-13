@@ -35,7 +35,7 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
 
         // I have no idea why webpack processes this file multiple times
         if (source.includes('FluentResource') || source.includes('unplugin-fluent-vue-sfc'))
-          return source
+          return undefined
 
         if (resolvedOptions.checkSyntax) {
           const errorsText = getSyntaxErrors(source)
