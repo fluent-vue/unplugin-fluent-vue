@@ -83,13 +83,13 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "*.d.ts",
     "dist"
   ],
   "scripts": {
     "test": "vitest",
     "test:coverage": "vitest  --coverage",
     "build": "tsup",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "prepare": "husky",
     "release": "dotenv release-it"
