@@ -32,7 +32,7 @@ jobs:
         run: pnpm test:coverage
 
       - name: Upload code coverage
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
 
   lint:
     runs-on: ubuntu-latest
