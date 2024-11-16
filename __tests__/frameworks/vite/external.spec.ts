@@ -129,4 +129,57 @@ describe('Vite external', () => {
       "
     `)
   })
+
+  it('can import FTL files', async () => {
+    // Arrange
+    // Act
+    const code = await compile({
+      plugins: [
+        vue3({
+          compiler,
+        }),
+        ExternalFluentPlugin({
+          baseDir: resolve(baseDir, 'fixtures'),
+          ftlDir: resolve(baseDir, 'fixtures/ftl'),
+          locales: ['en', 'da'],
+        }),
+      ],
+    }, '/fixtures/ftl/en/importer.js.ftl')
+
+    // Assert
+    expect(code).toMatchInlineSnapshot(`
+      "=== /fixtures/ftl/en/importer.js.ftl ===
+
+      import { FluentResource } from "/@id/virtual:empty:fluent-bundle"
+
+      export default /*#__PURE__*/ new FluentResource("key = Translations for js file")
+      "
+    `)
+  })
+
+  it('can parse FTL files', async () => {
+    // Arrange
+    // Act
+    const code = await compile({
+      plugins: [
+        vue3({
+          compiler,
+        }),
+        ExternalFluentPlugin({
+          baseDir: resolve(baseDir, 'fixtures'),
+          ftlDir: resolve(baseDir, 'fixtures/ftl'),
+          locales: ['en', 'da'],
+          parseFtl: true,
+        }),
+      ],
+    }, '/fixtures/ftl/en/importer.js.ftl')
+
+    // Assert
+    expect(code).toMatchInlineSnapshot(`
+      "=== /fixtures/ftl/en/importer.js.ftl ===
+
+      export default /*#__PURE__*/ {"body":[{"id":"key","value":"Translations for js file","attributes":{}}]}
+      "
+    `)
+  })
 })

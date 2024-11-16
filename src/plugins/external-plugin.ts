@@ -134,7 +134,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
       if (isFtl(id)) {
         const injectFtl = getInjectFtl(resolvedOptions)
         const result = injectFtl`
-export default /*#__PURE__*/ new FluentResource(${source})
+export default /*#__PURE__*/ ${source}
 `
 
         if (result.error)
