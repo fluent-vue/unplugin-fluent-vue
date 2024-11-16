@@ -23,6 +23,46 @@ describe('Vite SFC', () => {
     expect(code).toMatchSnapshot()
   })
 
+  describe('parseFtl', () => {
+    it('parses ftl syntax during compilation', async () => {
+      // Arrange
+      // Act
+      const code = await compile({
+        plugins: [
+          vue3({
+            compiler,
+          }),
+          SFCFluentPlugin({
+            parseFtl: true,
+            checkSyntax: false,
+          }),
+        ],
+      }, '/fixtures/test.vue')
+
+      // Assert
+      expect(code).toMatchSnapshot()
+    })
+
+    it('generates block code even if it has errors', async () => {
+      // Arrange
+      // Act
+      const code = await compile({
+        plugins: [
+          vue3({
+            compiler,
+          }),
+          SFCFluentPlugin({
+            parseFtl: true,
+            checkSyntax: false,
+          }),
+        ],
+      }, '/fixtures/errors.vue')
+
+      // Assert
+      expect(code).toMatchSnapshot()
+    })
+  })
+
   it('supports custom blockType', async () => {
     // Arrange
     // Act
