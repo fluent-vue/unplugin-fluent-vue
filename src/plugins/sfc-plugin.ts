@@ -1,9 +1,10 @@
 import type { VitePlugin } from 'unplugin'
 import type { SFCPluginOptions } from '../types'
 
-import MagicString from 'magic-string'
 import { createUnplugin } from 'unplugin'
+
 import { isCustomBlock, parseVueRequest } from '../loader-query'
+import { getInjectFtl } from './ftl/inject'
 import { getSyntaxErrors } from './ftl/parse'
 
 export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
@@ -22,48 +23,40 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
     },
     async transform(source: string, id: string) {
       const { query } = parseVueRequest(id)
+      if (!isCustomBlock(query, resolvedOptions)) {
+        return undefined
+      }
 
-      if (isCustomBlock(query, resolvedOptions)) {
-        const originalSource = source
+      const locale = query.locale
+      if (locale == null) {
+        this.error('Custom block does not have locale attribute')
+        return
+      }
 
-        const magic = new MagicString(source, { filename: id })
+      // I have no idea why webpack processes this file multiple times
+      if (source.includes('FluentResource') || source.includes('unplugin-fluent-vue-sfc') || source.includes('target.fluent'))
+        return undefined
 
-        source = source.replace(/\r\n/g, '\n').trim()
+      if (resolvedOptions.checkSyntax) {
+        const errorsText = getSyntaxErrors(source.replace(/\r\n/g, '\n').trim())
+        if (errorsText)
+          this.error(errorsText)
+      }
 
-        if (query.locale == null)
-          this.error('Custom block does not have locale attribute')
+      const injectFtl = getInjectFtl(resolvedOptions)
 
-        // I have no idea why webpack processes this file multiple times
-        if (source.includes('FluentResource') || source.includes('unplugin-fluent-vue-sfc'))
-          return undefined
-
-        if (resolvedOptions.checkSyntax) {
-          const errorsText = getSyntaxErrors(source)
-          if (errorsText)
-            this.error(errorsText)
-        }
-
-        if (originalSource.length > 0)
-          magic.update(0, originalSource.length, JSON.stringify(source))
-        else
-          magic.append('""')
-
-        magic.prepend(`
-import { FluentResource } from '@fluent/bundle'
-
+      const result = injectFtl`
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(`)
-        magic.append(')\n}\n')
+  target.fluent['${locale}'] = ${source}
+}
+`
 
-        return {
-          code: magic.toString(),
-          map: magic.generateMap(),
-        }
+      return {
+        code: result.toString(),
+        map: result.generateMap(),
       }
-
-      return undefined
     },
   }
 })

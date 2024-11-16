@@ -7,6 +7,7 @@ import MagicString from 'magic-string'
 
 import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
+import { getInjectFtl } from './ftl/inject'
 import { getSyntaxErrors } from './ftl/parse'
 
 const isVue = createFilter(['**/*.vue'])
@@ -137,20 +138,15 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
             this.error(errorsText)
         }
 
-        const magic = new MagicString(source, { filename: id })
+        const injectFtl = getInjectFtl(resolvedOptions)
 
-        if (source.length > 0)
-          magic.update(0, source.length, JSON.stringify(source))
-        else
-          magic.append('""')
-        magic.prepend(`
-import { FluentResource } from '@fluent/bundle'
-export default /*#__PURE__*/ new FluentResource(`)
-        magic.append(')\n')
+        const result = injectFtl`
+export default /*#__PURE__*/ new FluentResource(${source})
+`
 
         return {
-          code: magic.toString(),
-          map: magic.generateMap(),
+          code: result.toString(),
+          map: result.generateMap(),
         }
       }
 
