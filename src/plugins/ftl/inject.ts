@@ -1,13 +1,14 @@
 import { FluentResource } from '@fluent/bundle'
-import MagicString from 'magic-string'
+import MagicString, { type SourceMap } from 'magic-string'
+import { getSyntaxErrors } from './parse'
 
-type InjectFtlFn = (template: TemplateStringsArray, locale?: string, source?: string) => MagicString
+type InjectFtlFn = (template: TemplateStringsArray, locale?: string, source?: string) => { code?: { code: string, map: SourceMap }, error?: string }
 
 function normalize(str: string) {
   return str.replace(/\r\n/g, '\n').trim()
 }
 
-export function getInjectFtl(options: { parseFtl?: boolean }): InjectFtlFn {
+export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean }): InjectFtlFn {
   return (template, locale, source) => {
     if (source == null) {
       source = locale
@@ -16,6 +17,16 @@ export function getInjectFtl(options: { parseFtl?: boolean }): InjectFtlFn {
 
     if (source == null)
       throw new Error('Missing source')
+
+    if (options.checkSyntax) {
+      const errorsText = getSyntaxErrors(source.replace(/\r\n/g, '\n').trim())
+
+      if (errorsText) {
+        return {
+          error: errorsText,
+        }
+      }
+    }
 
     const magic = new MagicString(source)
     const importString = options.parseFtl === true ? '' : '\nimport { FluentResource } from \'@fluent/bundle\'\n'
@@ -36,6 +47,11 @@ export function getInjectFtl(options: { parseFtl?: boolean }): InjectFtlFn {
     if (template[2] != null)
       magic.append(template[2])
 
-    return magic
+    return {
+      code: {
+        code: magic.toString(),
+        map: magic.generateMap(),
+      },
+    }
   }
 }

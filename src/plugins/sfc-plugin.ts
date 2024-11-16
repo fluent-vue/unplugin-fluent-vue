@@ -5,12 +5,12 @@ import { createUnplugin } from 'unplugin'
 
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getInjectFtl } from './ftl/inject'
-import { getSyntaxErrors } from './ftl/parse'
 
 export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
   const resolvedOptions = {
     blockType: 'fluent',
     checkSyntax: true,
+    parseFtl: false,
     ...options,
   }
 
@@ -37,14 +37,7 @@ export const unplugin = createUnplugin((options: SFCPluginOptions, meta) => {
       if (source.includes('FluentResource') || source.includes('unplugin-fluent-vue-sfc') || source.includes('target.fluent'))
         return undefined
 
-      if (resolvedOptions.checkSyntax) {
-        const errorsText = getSyntaxErrors(source.replace(/\r\n/g, '\n').trim())
-        if (errorsText)
-          this.error(errorsText)
-      }
-
       const injectFtl = getInjectFtl(resolvedOptions)
-
       const result = injectFtl`
 export default function (Component) {
   const target = Component.options || Component
@@ -53,10 +46,10 @@ export default function (Component) {
 }
 `
 
-      return {
-        code: result.toString(),
-        map: result.generateMap(),
-      }
+      if (result.error)
+        this.error(result.error)
+
+      return result.code
     },
   }
 })
