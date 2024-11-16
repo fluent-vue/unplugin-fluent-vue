@@ -23,7 +23,10 @@ export function getInjectFtl(options: SFCPluginOptions): InjectFtlFn {
     const importString = options.parseFtl === true ? '' : '\nimport { FluentResource } from \'@fluent/bundle\'\n'
     const localeString = locale == null ? '' : locale
 
-    if (options.parseFtl === true) {
+    if (source.length === 0) {
+      magic.append('undefined')
+    }
+    else if (options.parseFtl === true) {
       const resource = new FluentResource(normalize(source))
       magic.overwrite(0, source.length, JSON.stringify(resource))
     }
