@@ -74,6 +74,29 @@ describe('Vite external', () => {
     expect(code).toMatchSnapshot()
   })
 
+  describe('parseFtl', () => {
+    it('parses ftl syntax during compilation', async () => {
+      // Arrange
+      // Act
+      const code = await compile({
+        plugins: [
+          vue3({
+            compiler,
+          }),
+          ExternalFluentPlugin({
+            baseDir: resolve(baseDir, 'fixtures'),
+            ftlDir: resolve(baseDir, 'fixtures/ftl'),
+            locales: ['en', 'da'],
+            parseFtl: true,
+          }),
+        ],
+      }, '/fixtures/components/external.vue')
+
+      // Assert
+      expect(code).toMatchSnapshot()
+    })
+  })
+
   it('virtual:ftl-for-file', async () => {
     // Arrange
     // Act
