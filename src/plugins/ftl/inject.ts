@@ -19,7 +19,7 @@ export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean 
       throw new Error('Missing source')
 
     if (options.checkSyntax) {
-      const errorsText = getSyntaxErrors(source.replace(/\r\n/g, '\n').trim())
+      const errorsText = getSyntaxErrors(normalize(source))
 
       if (errorsText) {
         return {
@@ -30,7 +30,6 @@ export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean 
 
     const magic = new MagicString(source)
     const importString = options.parseFtl === true ? '' : '\nimport { FluentResource } from \'@fluent/bundle\'\n'
-    const localeString = locale == null ? '' : locale
 
     if (source.length === 0) {
       magic.append('undefined')
@@ -43,9 +42,14 @@ export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean 
       magic.overwrite(0, source.length, `new FluentResource(${JSON.stringify(normalize(source))})`)
     }
 
-    magic.prepend(importString + template[0] + localeString + template[1])
-    if (template[2] != null)
+    if (template.length === 2) {
+      magic.prepend(importString + template[0])
+      magic.append(template[1])
+    }
+    else if (template.length === 3) {
+      magic.prepend(importString + template[0] + locale + template[1])
       magic.append(template[2])
+    }
 
     return {
       code: {
