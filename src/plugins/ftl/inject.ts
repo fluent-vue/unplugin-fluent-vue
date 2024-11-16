@@ -1,5 +1,3 @@
-import type { SFCPluginOptions } from 'src/types'
-
 import { FluentResource } from '@fluent/bundle'
 import MagicString from 'magic-string'
 
@@ -9,7 +7,7 @@ function normalize(str: string) {
   return str.replace(/\r\n/g, '\n').trim()
 }
 
-export function getInjectFtl(options: SFCPluginOptions): InjectFtlFn {
+export function getInjectFtl(options: { parseFtl?: boolean }): InjectFtlFn {
   return (template, locale, source) => {
     if (source == null) {
       source = locale
