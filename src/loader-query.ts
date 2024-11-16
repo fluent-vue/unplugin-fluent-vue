@@ -17,13 +17,13 @@ export function parseVueRequest(id: string) {
     ret.type = params.get('type') as VueQuery['type']
 
   if (params.has('blockType'))
-    ret.blockType = params.get('blockType')
+    ret.blockType = params.get('blockType') ?? undefined
 
   if (params.has('index'))
     ret.index = Number(params.get('index'))
 
   if (params.has('locale'))
-    ret.locale = params.get('locale')
+    ret.locale = params.get('locale') ?? undefined
 
   return {
     filename,

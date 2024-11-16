@@ -8,7 +8,6 @@ import MagicString from 'magic-string'
 import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
 import { getInjectFtl } from './ftl/inject'
-import { getSyntaxErrors } from './ftl/parse'
 
 const isVue = createFilter(['**/*.vue'])
 const isFtl = createFilter(['**/*.ftl'])
@@ -42,6 +41,7 @@ function isFluentCustomBlock(id: string) {
 export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
   const resolvedOptions = {
     checkSyntax: true,
+    parseFtl: false,
     virtualModuleName: 'virtual:ftl-for-file',
     getFtlPath: undefined as ((locale: string, vuePath: string) => string) | undefined,
     ...options,
@@ -132,35 +132,21 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
       }
 
       if (isFtl(id)) {
-        if (resolvedOptions.checkSyntax) {
-          const errorsText = getSyntaxErrors(source)
-          if (errorsText)
-            this.error(errorsText)
-        }
-
         const injectFtl = getInjectFtl(resolvedOptions)
-
         const result = injectFtl`
 export default /*#__PURE__*/ new FluentResource(${source})
 `
 
-        return {
-          code: result.toString(),
-          map: result.generateMap(),
-        }
+        if (result.error)
+          this.error(result.error)
+
+        return result.code
       }
 
       const query = parseVueRequest(id).query
       if (isFluentCustomBlock(id)) {
-        if (options.checkSyntax) {
-          const errorsText = getSyntaxErrors(source)
-          if (errorsText)
-            this.error(errorsText)
-        }
-
         const injectFtl = getInjectFtl(resolvedOptions)
-
-        const magic = injectFtl`
+        const result = injectFtl`
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
@@ -168,10 +154,10 @@ export default function (Component) {
 }
 `
 
-        return {
-          code: magic.toString(),
-          map: magic.generateMap(),
-        }
+        if (result.error)
+          this.error(result.error)
+
+        return result.code
       }
 
       return undefined
