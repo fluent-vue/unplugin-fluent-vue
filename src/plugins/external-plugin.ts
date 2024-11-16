@@ -132,7 +132,7 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
       }
 
       if (isFtl(id)) {
-        if (options.checkSyntax) {
+        if (resolvedOptions.checkSyntax) {
           const errorsText = getSyntaxErrors(source)
           if (errorsText)
             this.error(errorsText)
@@ -158,19 +158,15 @@ export default /*#__PURE__*/ new FluentResource(${source})
             this.error(errorsText)
         }
 
-        const magic = new MagicString(source, { filename: id })
-        if (source.length > 0)
-          magic.update(0, source.length, JSON.stringify(source))
-        else
-          magic.append('""')
-        magic.prepend(`
-import { FluentResource } from '@fluent/bundle'
+        const injectFtl = getInjectFtl(resolvedOptions)
 
+        const magic = injectFtl`
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(`)
-        magic.append(')\n}')
+  target.fluent['${query.locale}'] = ${source}
+}
+`
 
         return {
           code: magic.toString(),
