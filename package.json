@@ -112,9 +112,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.12.0",
+    "@fluent/bundle": "^0.18.0",
     "@nuxt/kit": "^3.14.1592",
     "@nuxt/schema": "^3.14.1592",
-    "@fluent/bundle": "^0.18.0",
     "@release-it-plugins/lerna-changelog": "7.0.0",
     "@types/node": "22.10.2",
     "@vitejs/plugin-vue": "5.2.1",
