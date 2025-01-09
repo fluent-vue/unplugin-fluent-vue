@@ -124,7 +124,7 @@
     "husky": "9.1.7",
     "lint-staged": "15.2.11",
     "memfs": "4.15.0",
-    "release-it": "17.10.0",
+    "release-it": "18.1.1",
     "tsup": "8.3.5",
     "typescript": "5.7.2",
     "vite": "6.0.4",
