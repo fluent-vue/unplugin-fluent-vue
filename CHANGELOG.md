@@ -7,6 +7,15 @@
 
 
 
+
+## 1.4.0 (2025-02-24)
+
+#### :star: New Features
+* [#107](https://github.com/fluent-vue/unplugin-fluent-vue/pull/107)  Add an option to parse FTL during build  ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.3.2 (2024-11-13)
 
 #### :bug: Bug Fixes
