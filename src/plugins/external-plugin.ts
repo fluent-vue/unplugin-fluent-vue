@@ -7,7 +7,7 @@ import MagicString from 'magic-string'
 
 import { createUnplugin } from 'unplugin'
 import { isCustomBlock, parseVueRequest } from '../loader-query'
-import { getSyntaxErrors } from './ftl/parse'
+import { getInjectFtl } from './ftl/inject'
 
 const isVue = createFilter(['**/*.vue'])
 const isFtl = createFilter(['**/*.ftl'])
@@ -41,6 +41,7 @@ function isFluentCustomBlock(id: string) {
 export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
   const resolvedOptions = {
     checkSyntax: true,
+    parseFtl: false,
     virtualModuleName: 'virtual:ftl-for-file',
     getFtlPath: undefined as ((locale: string, vuePath: string) => string) | undefined,
     ...options,
@@ -131,55 +132,32 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
       }
 
       if (isFtl(id)) {
-        if (options.checkSyntax) {
-          const errorsText = getSyntaxErrors(source)
-          if (errorsText)
-            this.error(errorsText)
-        }
+        const injectFtl = getInjectFtl(resolvedOptions, true)
+        const result = injectFtl`
+export default ${source}
+`
 
-        const magic = new MagicString(source, { filename: id })
+        if (result.error)
+          this.error(result.error)
 
-        if (source.length > 0)
-          magic.update(0, source.length, JSON.stringify(source))
-        else
-          magic.append('""')
-        magic.prepend(`
-import { FluentResource } from '@fluent/bundle'
-export default /*#__PURE__*/ new FluentResource(`)
-        magic.append(')\n')
-
-        return {
-          code: magic.toString(),
-          map: magic.generateMap(),
-        }
+        return result.code
       }
 
       const query = parseVueRequest(id).query
       if (isFluentCustomBlock(id)) {
-        if (options.checkSyntax) {
-          const errorsText = getSyntaxErrors(source)
-          if (errorsText)
-            this.error(errorsText)
-        }
-
-        const magic = new MagicString(source, { filename: id })
-        if (source.length > 0)
-          magic.update(0, source.length, JSON.stringify(source))
-        else
-          magic.append('""')
-        magic.prepend(`
-import { FluentResource } from '@fluent/bundle'
-
+        const injectFtl = getInjectFtl(resolvedOptions)
+        const result = injectFtl`
 export default function (Component) {
   const target = Component.options || Component
   target.fluent = target.fluent || {}
-  target.fluent['${query.locale}'] = new FluentResource(`)
-        magic.append(')\n}')
+  target.fluent['${query.locale}'] = ${source}
+}
+`
 
-        return {
-          code: magic.toString(),
-          map: magic.generateMap(),
-        }
+        if (result.error)
+          this.error(result.error)
+
+        return result.code
       }
 
       return undefined

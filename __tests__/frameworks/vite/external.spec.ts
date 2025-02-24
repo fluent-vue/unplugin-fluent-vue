@@ -74,6 +74,29 @@ describe('Vite external', () => {
     expect(code).toMatchSnapshot()
   })
 
+  describe('parseFtl', () => {
+    it('parses ftl syntax during compilation', async () => {
+      // Arrange
+      // Act
+      const code = await compile({
+        plugins: [
+          vue3({
+            compiler,
+          }),
+          ExternalFluentPlugin({
+            baseDir: resolve(baseDir, 'fixtures'),
+            ftlDir: resolve(baseDir, 'fixtures/ftl'),
+            locales: ['en', 'da'],
+            parseFtl: true,
+          }),
+        ],
+      }, '/fixtures/components/external.vue')
+
+      // Assert
+      expect(code).toMatchSnapshot()
+    })
+  })
+
   it('virtual:ftl-for-file', async () => {
     // Arrange
     // Act
@@ -103,6 +126,59 @@ describe('Vite external', () => {
       import en_ftl from "/fixtures/ftl/en/importer.js.ftl?import";
       import da_ftl from "/fixtures/ftl/da/importer.js.ftl?import";
       export default { 'en': en_ftl, 'da': da_ftl }
+      "
+    `)
+  })
+
+  it('can import FTL files', async () => {
+    // Arrange
+    // Act
+    const code = await compile({
+      plugins: [
+        vue3({
+          compiler,
+        }),
+        ExternalFluentPlugin({
+          baseDir: resolve(baseDir, 'fixtures'),
+          ftlDir: resolve(baseDir, 'fixtures/ftl'),
+          locales: ['en', 'da'],
+        }),
+      ],
+    }, '/fixtures/ftl/en/importer.js.ftl')
+
+    // Assert
+    expect(code).toMatchInlineSnapshot(`
+      "=== /fixtures/ftl/en/importer.js.ftl ===
+
+      import { FluentResource } from "/@id/virtual:empty:fluent-bundle"
+
+      export default /*#__PURE__*/ new FluentResource("key = Translations for js file")
+      "
+    `)
+  })
+
+  it('can parse FTL files', async () => {
+    // Arrange
+    // Act
+    const code = await compile({
+      plugins: [
+        vue3({
+          compiler,
+        }),
+        ExternalFluentPlugin({
+          baseDir: resolve(baseDir, 'fixtures'),
+          ftlDir: resolve(baseDir, 'fixtures/ftl'),
+          locales: ['en', 'da'],
+          parseFtl: true,
+        }),
+      ],
+    }, '/fixtures/ftl/en/importer.js.ftl')
+
+    // Assert
+    expect(code).toMatchInlineSnapshot(`
+      "=== /fixtures/ftl/en/importer.js.ftl ===
+
+      export default {"body":[{"id":"key","value":"Translations for js file","attributes":{}}]}
       "
     `)
   })

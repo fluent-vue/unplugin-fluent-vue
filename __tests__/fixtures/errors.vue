@@ -19,4 +19,6 @@ shared-photos =
     [female] her stream
    *[other] their stream
   }.
+
+entry-without-error = Hello, World!
 </fluent>

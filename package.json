@@ -95,6 +95,7 @@
     "release": "dotenv release-it"
   },
   "peerDependencies": {
+    "@fluent/bundle": "*",
     "@nuxt/kit": "^3"
   },
   "peerDependenciesMeta": {
@@ -111,6 +112,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
+    "@fluent/bundle": "^0.18.0",
     "@nuxt/kit": "^3.15.4",
     "@nuxt/schema": "^3.15.4",
     "@release-it-plugins/lerna-changelog": "7.0.0",
