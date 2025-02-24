@@ -1,4 +1,5 @@
-import { createCompoundExpression, createSimpleExpression, type DirectiveTransform, NodeTypes } from '@vue/compiler-core'
+import type { DirectiveTransform } from '@vue/compiler-core'
+import { createCompoundExpression, createSimpleExpression, NodeTypes } from '@vue/compiler-core'
 
 export const directiveTransform: DirectiveTransform = (dir, node, context) => {
   const baseCode = `${context.prefixIdentifiers ? '_ctx.' : ''}`

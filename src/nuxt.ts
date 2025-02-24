@@ -3,9 +3,10 @@
 import type { } from '@nuxt/schema'
 import type { ExternalPluginOptionsFolder, ExternalPluginOptionsFunction } from './types'
 
+import type { SFCPluginOptions } from './vite'
 import { addVitePlugin, defineNuxtModule } from '@nuxt/kit'
 import { directiveTransform } from './directive-transform'
-import { ExternalFluentPlugin, SFCFluentPlugin, type SFCPluginOptions } from './vite'
+import { ExternalFluentPlugin, SFCFluentPlugin } from './vite'
 
 interface NuxtFluentOptions {
   sfc?: SFCPluginOptions
