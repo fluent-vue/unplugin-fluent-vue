@@ -178,7 +178,7 @@ describe('Vite external', () => {
     expect(code).toMatchInlineSnapshot(`
       "=== /fixtures/ftl/en/importer.js.ftl ===
 
-      export default /*#__PURE__*/ {"body":[{"id":"key","value":"Translations for js file","attributes":{}}]}
+      export default {"body":[{"id":"key","value":"Translations for js file","attributes":{}}]}
       "
     `)
   })

@@ -132,9 +132,9 @@ export const unplugin = createUnplugin((options: ExternalPluginOptions) => {
       }
 
       if (isFtl(id)) {
-        const injectFtl = getInjectFtl(resolvedOptions)
+        const injectFtl = getInjectFtl(resolvedOptions, true)
         const result = injectFtl`
-export default /*#__PURE__*/ ${source}
+export default ${source}
 `
 
         if (result.error)

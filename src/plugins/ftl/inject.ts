@@ -8,12 +8,14 @@ function normalize(str: string) {
   return str.replace(/\r\n/g, '\n').trim()
 }
 
-export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean }): InjectFtlFn {
+export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean }, addPureAnotation = false): InjectFtlFn {
   return (template, locale, source) => {
     if (source == null) {
       source = locale
       locale = undefined
     }
+
+    const pureAnotation = addPureAnotation ? '/*#__PURE__*/ ' : ''
 
     if (source == null)
       throw new Error('Missing source')
@@ -39,7 +41,7 @@ export function getInjectFtl(options: { checkSyntax: boolean, parseFtl: boolean 
       magic.overwrite(0, source.length, JSON.stringify(resource))
     }
     else {
-      magic.overwrite(0, source.length, `new FluentResource(${JSON.stringify(normalize(source))})`)
+      magic.overwrite(0, source.length, `${pureAnotation}new FluentResource(${JSON.stringify(normalize(source))})`)
     }
 
     if (template.length === 2) {
