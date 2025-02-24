@@ -92,7 +92,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "prepare": "husky",
-    "release": "dotenv release-it"
+    "release": "dotenv -- release-it"
   },
   "peerDependencies": {
     "@fluent/bundle": "*",
