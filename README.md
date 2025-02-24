@@ -44,12 +44,14 @@ export default defineConfig({
     SFCFluentPlugin({ // define messages in SFCs
       blockType: 'fluent', // default 'fluent' - name of the block in SFCs
       checkSyntax: true, // default true - whether to check syntax of the messages
+      parseFtl: false, // default false - whether to parse ftl files during build
     }),
     ExternalFluentPlugin({ // define messages in external ftl files
       baseDir: path.resolve('src'), // required - base directory for Vue files
       ftlDir: path.resolve('src/locales'), // required - directory with ftl files
       locales: ['en', 'da'], // required - list of locales
       checkSyntax: true, // default true - whether to check syntax of the messages
+      parseFtl: false, // default false - whether to parse ftl files during build
     }),
   ],
 })
