@@ -92,7 +92,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "prepare": "husky",
-    "release": "dotenv -- release-it"
+    "release": "release-it"
   },
   "peerDependencies": {
     "@fluent/bundle": "*",
@@ -120,7 +120,6 @@
     "@vitejs/plugin-vue": "5.2.4",
     "@vitest/coverage-istanbul": "^3.1.4",
     "@vue/compiler-sfc": "3.5.16",
-    "dotenv-cli": "8.0.0",
     "eslint": "9.28.0",
     "execa": "9.6.0",
     "husky": "9.1.7",
@@ -137,7 +136,9 @@
   },
   "lint-staged": {
     "*.js": "eslint --fix",
-    "*.ts?(x)": "eslint --fix"
+    "*.ts?(x)": "eslint --fix",
+    "*.json": "eslint --fix",
+    "*.md": "eslint --fix"
   },
   "changelog": {
     "labels": {
