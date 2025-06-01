@@ -8,6 +8,15 @@
 
 
 
+
+## 1.4.1 (2025-06-01)
+
+#### :star: New Features
+* [#128](https://github.com/fluent-vue/unplugin-fluent-vue/pull/128) Set up release workflow and NPM provenance ([@Demivan](https://github.com/Demivan))
+
+#### Committers: 1
+- Ivan Demchuk ([@Demivan](https://github.com/Demivan))
+
 ## 1.4.0 (2025-02-24)
 
 #### :star: New Features
