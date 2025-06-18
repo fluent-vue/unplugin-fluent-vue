@@ -115,7 +115,7 @@
     "@fluent/bundle": "^0.19.1",
     "@nuxt/kit": "^3.17.4",
     "@nuxt/schema": "^3.17.4",
-    "@release-it-plugins/lerna-changelog": "7.0.0",
+    "@release-it-plugins/lerna-changelog": "8.0.1",
     "@types/node": "22.15.29",
     "@vitejs/plugin-vue": "5.2.4",
     "@vitest/coverage-istanbul": "^3.1.4",
