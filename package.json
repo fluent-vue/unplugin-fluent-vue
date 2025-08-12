@@ -128,7 +128,7 @@
     "release-it": "19.0.3",
     "tsup": "8.5.0",
     "typescript": "5.8.3",
-    "vite": "6.3.5",
+    "vite": "7.1.2",
     "vitest": "3.1.4",
     "vue": "3.5.16",
     "vue-loader": "17.4.2",
