@@ -96,7 +96,7 @@
   },
   "peerDependencies": {
     "@fluent/bundle": "*",
-    "@nuxt/kit": "^3"
+    "@nuxt/kit": "^3 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@nuxt/kit": {
@@ -113,8 +113,8 @@
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
     "@fluent/bundle": "^0.19.1",
-    "@nuxt/kit": "^3.17.4",
-    "@nuxt/schema": "^3.17.4",
+    "@nuxt/kit": "^4.0.3",
+    "@nuxt/schema": "^4.0.3",
     "@release-it-plugins/lerna-changelog": "8.0.1",
     "@types/node": "22.15.29",
     "@vitejs/plugin-vue": "6.0.1",
