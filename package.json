@@ -111,7 +111,7 @@
     "unplugin": "^2.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.2.1",
+    "@antfu/eslint-config": "^6.2.0",
     "@fluent/bundle": "^0.19.1",
     "@nuxt/kit": "^4.0.3",
     "@nuxt/schema": "^4.0.3",
