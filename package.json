@@ -108,7 +108,7 @@
     "@rollup/pluginutils": "^5.0.0",
     "@vue/compiler-core": "^3.4.21",
     "magic-string": "^0.30.0",
-    "unplugin": "^2.0.0"
+    "unplugin": "^3.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
