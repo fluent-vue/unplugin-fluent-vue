@@ -2,7 +2,7 @@
   "name": "unplugin-fluent-vue",
   "type": "module",
   "version": "1.4.1",
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.28.2",
   "description": "unplugin for fluent-vue. Adds support for custom blocks in Vue SFC and external ftl files.",
   "author": {
     "name": "Ivan Demchuk",
@@ -113,8 +113,8 @@
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
     "@fluent/bundle": "^0.19.1",
-    "@nuxt/kit": "^4.2.2",
-    "@nuxt/schema": "^4.2.2",
+    "@nuxt/kit": "^4.3.0",
+    "@nuxt/schema": "^4.3.0",
     "@release-it-plugins/lerna-changelog": "8.0.1",
     "@types/node": "24.10.9",
     "@vitejs/plugin-vue": "6.0.3",
@@ -124,7 +124,7 @@
     "execa": "9.6.1",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
-    "memfs": "4.56.9",
+    "memfs": "4.56.10",
     "release-it": "19.2.4",
     "tsup": "8.5.1",
     "typescript": "5.9.3",
