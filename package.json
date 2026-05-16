@@ -123,7 +123,7 @@
     "eslint": "9.39.2",
     "execa": "9.6.1",
     "husky": "9.1.7",
-    "lint-staged": "16.2.7",
+    "lint-staged": "17.0.5",
     "memfs": "4.56.9",
     "release-it": "19.2.4",
     "tsup": "8.5.1",
