@@ -1,19 +1,9 @@
 # unplugin-fluent-vue
 
-<p align="center">
-  <a href="https://github.com/fluent-vue/unplugin-fluent-vue/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/fluent-vue/unplugin-fluent-vue/test.yml?branch=main" alt="GitHub Workflow Status">
-  </a>
-  <a href="https://codecov.io/gh/fluent-vue/unplugin-fluent-vue">
-    <img src="https://codecov.io/gh/fluent-vue/unplugin-fluent-vue/branch/main/graph/badge.svg?token=0JSSE94EGJ" alt="codecov">
-  </a>
-  <a href="https://standardjs.com">
-    <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide">
-  </a>
-  <a href="https://github.com/fluent-vue/unplugin-fluent-vue/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/fluent-vue/unplugin-fluent-vue" alt="GitHub license">
-  </a>
-</p>
+> [!IMPORTANT]
+> **This repository has moved.** `unplugin-fluent-vue` is now developed as part of the [fluent-vue monorepo](https://github.com/fluent-vue/fluent-vue) at [`packages/unplugin-fluent-vue`](https://github.com/fluent-vue/fluent-vue/tree/main/packages/unplugin-fluent-vue).
+>
+> Please file new issues and pull requests there. This repository is archived and will no longer receive updates — the package on npm continues to be published from the new location under the same name.
 
 [fluent-vue](https://github.com/fluent-vue/fluent-vue) plugin for Vite, Webpack and Rollup (thanks to [unplugin](https://github.com/unjs/unplugin)).
 
